@@ -1,0 +1,7 @@
+<div class="header-container">
+    <div class="header-title"> Y o o n </div>
+    <ng-container *ngFor="let pageName of pageKeys">
+        <app-text-button [content]="pageName" [clicked]="pages[pageName]" (onClickEvent)="onClickPageButton(pageName)"
+            #headerButtons></app-text-button>
+    </ng-container>
+</div>

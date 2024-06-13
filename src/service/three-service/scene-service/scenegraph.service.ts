@@ -13,6 +13,7 @@ export class ScenegraphService {
     undefined as unknown as THREE.ShaderMaterial;
   public renderer: THREE.WebGLRenderer =
     undefined as unknown as THREE.WebGLRenderer;
+  public animationID: number = 0;
   constructor() {}
 
   public initService(container: HTMLCanvasElement) {
@@ -36,29 +37,30 @@ export class ScenegraphService {
     this.camera.position.z = 5;
 
     const geometry = new THREE.SphereGeometry(1, 64, 64);
-
+    //const geometry = new THREE.TorusGeometry(1, 0.5, 64, 64);
+    //const geometry = new THREE.BoxGeometry(1, 1, 1, 64, 64, 64);
+    //const geometry = new THREE.TorusKnotGeometry(1, 0.1, 100, 16);
     const vertexShader = `
       varying vec3 vNormal;
-    varying vec3 vPosition;
+      varying vec3 vPosition;
 
-    uniform float time;
+      uniform float time;
 
-    void main() {
+      void main() {
         vNormal = normalize(normalMatrix * normal);
         vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
 
+        vec3 v = normalize(vec3(1.0, 1.0, 1.0));
 
-        // Calculate displacement using a sine function
-        float displacement = cos(position.x * 3.0 + time) * 0.1;
-        vec3 displacedPosition = position + normal * displacement;
+        float displacement = dot(v, normalize(position));
+        vec3 displacedPosition = position + vNormal * displacement; // Modify vertex position using normal direction
 
-        // Scale the vertex position
-        vec3 scaledPosition = displacedPosition;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(displacedPosition, 1.0);
 
-        // Calculate the final vertex position
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(scaledPosition, 1.0);
-    }
-        `;
+
+      }
+    `;
+
     const fragmentShader = `
       varying vec3 vNormal;
     varying vec3 vPosition;
@@ -77,12 +79,12 @@ export class ScenegraphService {
 
         // Diffuse component
         float diff = max(dot(lightDir, normal), 0.0);
-        vec3 diffuse = diff * vec3(1.0, 1.0, 1.0); // Assuming white light
+        vec3 diffuse = diff * vec3(0.6, 0.8, 1.0); // Assuming white light
 
         // Specular component
         vec3 reflectDir = reflect(-lightDir, normal);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-        vec3 specular = spec * vec3(1.0, 1.0, 1.0); // Assuming white light
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
+        vec3 specular = spec * vec3(0.1, 0.1, 0.1); // Assuming white light
 
         // Combine components
         vec3 color = ambient + diffuse + specular;
@@ -93,7 +95,7 @@ export class ScenegraphService {
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
       uniforms: {
-        lightPosition: { value: new THREE.Vector3(0, 0, 10) },
+        lightPosition: { value: new THREE.Vector3(0, 0, 100) },
         viewPosition: { value: new THREE.Vector3(0, 0, 5) },
         time: { value: 0.0 },
       },
@@ -108,18 +110,22 @@ export class ScenegraphService {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
   }
+
+  public destroyAnimation() {
+    cancelAnimationFrame(this.animationID);
+  }
 }
 
 /** 애니메이션 함수 */
 const startAnimation = function (scene: ScenegraphService) {
   const animationFrame = function () {
     // Rotate the cube
-    //scene.sphere.rotation.x += 0.01;
-    //scene.sphere.rotation.y += 0.01;
+    scene.sphere.rotation.x += 0.01;
+    scene.sphere.rotation.y += 0.01;
     scene.material.uniforms['time'].value += 0.05;
     // Render the scene with the camera
     scene.renderer.render(scene.scene, scene.camera);
-    requestAnimationFrame(animationFrame);
+    scene.animationID = requestAnimationFrame(animationFrame);
   };
   animationFrame();
 };
