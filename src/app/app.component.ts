@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ScenegraphService } from '../service/three-service/scene-service/scenegraph.service';
