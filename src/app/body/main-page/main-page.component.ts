@@ -18,6 +18,7 @@ export class MainPageComponent {
   public ngOnDestroy() {
     this.scene.destroyAnimation();
   }
+
   @HostListener('mousemove', ['$event'])
   private onMouseMove(event: MouseEvent) {}
   @HostListener('window:resize')
