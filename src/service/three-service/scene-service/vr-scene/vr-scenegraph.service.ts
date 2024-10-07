@@ -77,7 +77,7 @@ export class VrScenegraphService {
       0.1,
       1000
     );
-    this.camera.position.set(0, 1.6, 5);
+    this.camera.position.set(0, 0, 20);
 
     const geometry = new THREE.SphereGeometry(1, 64, 64);
     //const geometry = new THREE.TorusGeometry(1, 0.5, 64, 64);
@@ -153,6 +153,7 @@ export class VrScenegraphService {
       },
     });
     this.sphere = new THREE.Mesh(geometry, this.material);
+    this.sphere.position.set(0, 0, -10);
     //this.sphere.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 4);
     this.scene.add(this.sphere);
 
@@ -171,7 +172,7 @@ export class VrScenegraphService {
           //child.rotation.y += 0.01;
         }
       });
-      this.material.uniforms['time'].value += 0.001;
+      this.material.uniforms['time'].value += 0.0001;
 
       // 씬 렌더링
       this.renderer.render(this.scene, this.camera);
