@@ -13,6 +13,9 @@ export class VrScenegraphService {
   public renderer: THREE.WebGLRenderer =
     undefined as unknown as THREE.WebGLRenderer;
   public animationID: number | undefined = undefined;
+  public sphere: THREE.Mesh = undefined as unknown as THREE.Mesh;
+  public material: THREE.ShaderMaterial =
+    undefined as unknown as THREE.ShaderMaterial;
 
   constructor() {}
 
@@ -51,7 +54,7 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip1);
 
     const hand1 = this.renderer.xr.getHand(0);
-    const handModel1 = handModelFactory.createHandModel(hand1, 'mesh');
+    const handModel1 = handModelFactory.createHandModel(hand1, 'boxes');
     hand1.add(handModel1);
     this.scene.add(hand1);
 
@@ -63,7 +66,7 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip2);
 
     const hand2 = this.renderer.xr.getHand(1);
-    const handModel2 = handModelFactory.createHandModel(hand2, 'mesh');
+    const handModel2 = handModelFactory.createHandModel(hand2, 'boxes');
     hand2.add(handModel2);
     this.scene.add(hand2);
 
@@ -74,15 +77,84 @@ export class VrScenegraphService {
       0.1,
       1000
     );
-    this.camera.position.set(0, 1.6, 3);
+    this.camera.position.set(0, 1.6, 5);
 
-    // 기본적인 장면 요소 추가 (예: 큐브)
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.set(0, 1, -10);
-    cube.position.set(0, 1, -10);
-    this.scene.add(cube);
+    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    //const geometry = new THREE.TorusGeometry(1, 0.5, 64, 64);
+    //const geometry = new THREE.BoxGeometry(1, 1, 1, 64, 64, 64);
+    //const geometry = new THREE.TorusKnotGeometry(1, 0.1, 100, 16);
+    const vertexShader = `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+
+      uniform float time;
+
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
+
+        vec3 v_x = vec3(1.0, 0.0, 0.0);
+        vec3 v_y = vec3(0.0, 1.0, 0.0);
+        vec3 v_z = vec3(0.0, 0.0, 1.0);
+        vec3 v_xyz = vec3(1.0, 1.0, 1.0);
+
+        float degree_x = acos(dot(v_x, normalize(position))) + time;
+        float degree_y = acos(dot(v_y, normalize(position))) + time;
+        float degree_z = acos(dot(v_z, normalize(position))) + time;
+        float degree_xyz = acos(dot(normalize(v_xyz), normalize(position))) + time;
+
+        float frequency = 50.0;
+
+        float displacement = (((cos(frequency * degree_x) + 0.1) * (sin(frequency * degree_y) + 0.1) * (cos(frequency * degree_z) + 0.1) * (cos(frequency * degree_xyz) + 0.1)) + 0.1);
+
+        vec3 displacedPosition = position + vNormal * displacement;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(displacedPosition, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+
+      uniform vec3 lightPosition;
+      uniform vec3 viewPosition;
+
+      void main() {
+        // Normalize interpolated normal and position
+        vec3 normal = normalize(vNormal);
+        vec3 lightDir = normalize(lightPosition - vPosition);
+        vec3 viewDir = normalize(viewPosition - vPosition);
+        
+        // Ambient component
+        vec3 ambient = vec3(0.1, 0.1, 0.1);
+
+        // Diffuse component
+        float diff = max(dot(lightDir, normal), 0.0);
+        vec3 diffuse = diff * vec3(0.6, 0.8, 1.0); // Assuming white light
+
+        // Specular component
+        vec3 reflectDir = reflect(-lightDir, normal);
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
+        vec3 specular = spec * vec3(0.1, 0.1, 0.1); // Assuming white light
+
+        // Combine components
+        vec3 color = ambient + diffuse + specular;
+        gl_FragColor = vec4(color, 1.0);
+    }
+    `;
+    this.material = new THREE.ShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms: {
+        lightPosition: { value: new THREE.Vector3(0, 0, 100) },
+        viewPosition: { value: new THREE.Vector3(0, 0, 5) },
+        time: { value: 0.0 },
+      },
+    });
+    this.sphere = new THREE.Mesh(geometry, this.material);
+    //this.sphere.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 4);
+    this.scene.add(this.sphere);
 
     // 애니메이션 시작
     this.startAnimation();
@@ -94,10 +166,12 @@ export class VrScenegraphService {
       // 간단한 회전 애니메이션
       this.scene.children.forEach((child) => {
         if (child instanceof THREE.Mesh) {
-          child.rotation.x += 0.01;
-          child.rotation.y += 0.01;
+          //child.rotation.x += 0.01;
+          //child.rotation.y += 0.01;
+          //child.rotation.y += 0.01;
         }
       });
+      this.material.uniforms['time'].value += 0.001;
 
       // 씬 렌더링
       this.renderer.render(this.scene, this.camera);
