@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
+import { XRHandModelFactory } from 'three/examples/jsm/webxr/XRHandModelFactory.js';
 import { OculusHandModel } from 'three/examples/jsm/webxr/OculusHandModel.js';
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,7 @@ export class VrScenegraphService {
     this.scene.add(controller2);
 
     const controllerModelFactory = new XRControllerModelFactory();
+    const handModelFactory = new XRHandModelFactory();
 
     // Hand 1
     const controllerGrip1 = this.renderer.xr.getControllerGrip(0);
@@ -49,7 +51,7 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip1);
 
     const hand1 = this.renderer.xr.getHand(0);
-    const handModel1 = new OculusHandModel(hand1);
+    const handModel1 = handModelFactory.createHandModel(hand1, 'mesh');
     hand1.add(handModel1);
     this.scene.add(hand1);
 
@@ -61,7 +63,7 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip2);
 
     const hand2 = this.renderer.xr.getHand(1);
-    const handModel2 = new OculusHandModel(hand2);
+    const handModel2 = handModelFactory.createHandModel(hand2, 'mesh');
     hand2.add(handModel2);
     this.scene.add(hand2);
 
