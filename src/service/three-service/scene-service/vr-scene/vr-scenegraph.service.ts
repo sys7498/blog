@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
+import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 import { OculusHandModel } from 'three/examples/jsm/webxr/OculusHandModel.js';
 @Injectable({
   providedIn: 'root',
@@ -26,21 +27,38 @@ export class VrScenegraphService {
       antialias: true,
       alpha: true,
       precision: 'highp',
-      powerPreference: 'high-performance',
     });
-    this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    this.renderer.setPixelRatio(Math.min(3, window.devicePixelRatio));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.xr.enabled = true;
+
+    // controllers
     const controller1 = this.renderer.xr.getController(0);
-    const controller2 = this.renderer.xr.getController(1);
     this.scene.add(controller1);
+
+    const controller2 = this.renderer.xr.getController(1);
     this.scene.add(controller2);
 
-    // 손 인식 기능 추가
+    const controllerModelFactory = new XRControllerModelFactory();
+
+    // Hand 1
+    const controllerGrip1 = this.renderer.xr.getControllerGrip(0);
+    controllerGrip1.add(
+      controllerModelFactory.createControllerModel(controllerGrip1)
+    );
+    this.scene.add(controllerGrip1);
+
     const hand1 = this.renderer.xr.getHand(0);
     const handModel1 = new OculusHandModel(hand1);
     hand1.add(handModel1);
     this.scene.add(hand1);
+
+    // Hand 2
+    const controllerGrip2 = this.renderer.xr.getControllerGrip(1);
+    controllerGrip2.add(
+      controllerModelFactory.createControllerModel(controllerGrip2)
+    );
+    this.scene.add(controllerGrip2);
 
     const hand2 = this.renderer.xr.getHand(1);
     const handModel2 = new OculusHandModel(hand2);
