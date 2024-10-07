@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ScenegraphService } from '../../service/three-service/scene-service/scenegraph.service';
+import { ScenegraphService } from '../../service/three-service/scene-service/main-scene/scenegraph.service';
 import { HeaderComponent } from '../header/header.component';
 import { RouterModule } from '@angular/router';
 

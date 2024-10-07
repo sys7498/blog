@@ -22,6 +22,7 @@ export class HeaderComponent {
     '/post': false,
     '/about': false,
     '/project': false,
+    '/vr': false,
   };
 
   @Input() public currentPath: string = '';

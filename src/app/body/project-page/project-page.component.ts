@@ -1,12 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ScenegraphService } from '../../../service/three-service/scene-service/main-scene/scenegraph.service';
-
+import { VRButton } from 'three/examples/jsm/webxr/VRButton';
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss',
+  selector: 'app-project-page',
+  standalone: true,
+  imports: [],
+  templateUrl: './project-page.component.html',
+  styleUrl: './project-page.component.scss',
 })
-export class MainPageComponent {
+export class ProjectPageComponent {
   @ViewChild('viewport') viewport: ElementRef =
     undefined as unknown as ElementRef;
   constructor(private scene: ScenegraphService) {}

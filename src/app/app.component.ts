@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ScenegraphService } from '../service/three-service/scene-service/scenegraph.service';
+import { ScenegraphService } from '../service/three-service/scene-service/main-scene/scenegraph.service';
 
 @Component({
   selector: 'app-root',

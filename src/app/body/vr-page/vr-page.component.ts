@@ -1,6 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
-import { ScenegraphService } from '../../../service/three-service/scene-service/scenegraph.service';
+import { VrScenegraphService } from '../../../service/three-service/scene-service/vr-scene/vr-scenegraph.service';
 @Component({
   selector: 'app-vr-page',
   templateUrl: './vr-page.component.html',
@@ -9,13 +9,20 @@ import { ScenegraphService } from '../../../service/three-service/scene-service/
 export class VrPageComponent {
   @ViewChild('vrViewport') vrViewport: ElementRef =
     undefined as unknown as ElementRef;
-  constructor(private scene: ScenegraphService) {}
+  constructor(private vrscene: VrScenegraphService) {}
 
   public ngAfterViewInit() {
-    this.scene.initVRService(this.vrViewport.nativeElement);
+    this.vrscene.initVrService(this.vrViewport.nativeElement);
+    document.body.appendChild(VRButton.createButton(this.vrscene.renderer));
   }
 
   public ngOnDestroy() {
-    this.scene.destroyAnimation();
+    this.vrscene.destroyAnimation();
+  }
+  @HostListener('mousemove', ['$event'])
+  private onMouseMove(event: MouseEvent) {}
+  @HostListener('window:resize')
+  private onWindowResize() {
+    this.vrscene.onResize();
   }
 }
