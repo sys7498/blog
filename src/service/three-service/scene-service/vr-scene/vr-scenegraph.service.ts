@@ -19,7 +19,7 @@ export class VrScenegraphService {
   public initVrService(container: HTMLCanvasElement) {
     // 씬 생성
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
+    this.scene.background = new THREE.Color(0xffffff);
 
     // 렌더러 생성 및 WebXR 활성화
     this.renderer = new THREE.WebGLRenderer({
