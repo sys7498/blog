@@ -25,10 +25,26 @@ export class VrScenegraphService {
       canvas: container,
       antialias: true,
       alpha: true,
+      precision: 'highp',
+      powerPreference: 'high-performance',
     });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.xr.enabled = true;
+    const controller1 = this.renderer.xr.getController(0);
+    const controller2 = this.renderer.xr.getController(1);
+    this.scene.add(controller1);
+    this.scene.add(controller2);
+
+    // 손 인식 기능 추가
+    const hand1 = this.renderer.xr.getHand(0);
+    const hand2 = this.renderer.xr.getHand(1);
+    const handModelFactory =
+      new (require('three/examples/jsm/webxr/HandModelFactory.js').HandModelFactory)();
+    hand1.add(handModelFactory.createHandModel(hand1, 'mesh'));
+    hand2.add(handModelFactory.createHandModel(hand2, 'mesh'));
+    this.scene.add(hand1);
+    this.scene.add(hand2);
 
     // 카메라 생성
     this.camera = new THREE.PerspectiveCamera(
@@ -37,12 +53,14 @@ export class VrScenegraphService {
       0.1,
       1000
     );
-    this.camera.position.set(0, 0, 20);
+    this.camera.position.set(0, 1.6, 3);
 
     // 기본적인 장면 요소 추가 (예: 큐브)
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);
+    cube.position.set(0, 1, -10);
+    cube.position.set(0, 1, -10);
     this.scene.add(cube);
 
     // 애니메이션 시작
@@ -64,7 +82,7 @@ export class VrScenegraphService {
       this.renderer.render(this.scene, this.camera);
 
       // 애니메이션 프레임 요청
-      this.animationID = this.renderer.setAnimationLoop(animationCallback)!;
+      this.renderer.setAnimationLoop(animationCallback);
     };
 
     animationCallback();
@@ -80,6 +98,8 @@ export class VrScenegraphService {
   /** 애니메이션 중지 */
   public destroyAnimation() {
     this.renderer.setAnimationLoop(null);
-    cancelAnimationFrame(this.animationID!);
+    if (this.animationID !== undefined) {
+      cancelAnimationFrame(this.animationID);
+    }
   }
 }
