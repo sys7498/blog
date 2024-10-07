@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
-
+import { OculusHandModel } from 'three/examples/jsm/webxr/OculusHandModel.js';
 @Injectable({
   providedIn: 'root',
 })
@@ -38,12 +38,13 @@ export class VrScenegraphService {
 
     // 손 인식 기능 추가
     const hand1 = this.renderer.xr.getHand(0);
-    const hand2 = this.renderer.xr.getHand(1);
-    const handModelFactory =
-      new (require('three/examples/jsm/webxr/HandModelFactory.js').HandModelFactory)();
-    hand1.add(handModelFactory.createHandModel(hand1, 'mesh'));
-    hand2.add(handModelFactory.createHandModel(hand2, 'mesh'));
+    const handModel1 = new OculusHandModel(hand1);
+    hand1.add(handModel1);
     this.scene.add(hand1);
+
+    const hand2 = this.renderer.xr.getHand(1);
+    const handModel2 = new OculusHandModel(hand2);
+    hand2.add(handModel2);
     this.scene.add(hand2);
 
     // 카메라 생성
