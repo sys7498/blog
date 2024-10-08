@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
+import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 import { XRHandModelFactory } from 'three/examples/jsm/webxr/XRHandModelFactory.js';
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh.js';
@@ -40,7 +41,15 @@ export class VrScenegraphService {
     this.renderer.xr.setFramebufferScaleFactor(2.0);
     this.renderer.xr.enabled = true;
 
+    const sessionInit = {
+      requiredFeatures: ['hand-tracking'],
+    };
+    document.body.appendChild(
+      VRButton.createButton(this.renderer, sessionInit)
+    );
+
     // controllers
+
     const controller1 = this.renderer.xr.getController(0);
     this.scene.add(controller1);
 
@@ -58,8 +67,8 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip1);
 
     const hand1 = this.renderer.xr.getHand(0);
-    const handModel1 = handModelFactory.createHandModel(hand1, 'boxes');
-    hand1.add(handModel1);
+    hand1.add(handModelFactory.createHandModel(hand1));
+
     this.scene.add(hand1);
 
     // Hand 2
@@ -70,8 +79,7 @@ export class VrScenegraphService {
     this.scene.add(controllerGrip2);
 
     const hand2 = this.renderer.xr.getHand(1);
-    const handModel2 = handModelFactory.createHandModel(hand2, 'boxes');
-    hand2.add(handModel2);
+    hand2.add(handModelFactory.createHandModel(hand2));
     this.scene.add(hand2);
 
     // 카메라 생성
@@ -89,27 +97,8 @@ export class VrScenegraphService {
     this.createMovingSphere(text);
     this.createBlackSquare();
     this.add3DText(text);
-    this.detectPinch(hand1, 0);
-    this.detectPinch(hand2, 1);
     // 애니메이션 시작
     this.startAnimation();
-  }
-
-  private detectPinch(hand: THREE.Group, handIndex: number) {
-    hand.addEventListener('pinchstart', () => {
-      console.log(`Hand ${handIndex + 1} started pinching!`);
-      this.onPinch(handIndex);
-    });
-
-    hand.addEventListener('pinchend', () => {
-      console.log(`Hand ${handIndex + 1} stopped pinching!`);
-    });
-  }
-
-  private onPinch(handIndex: number) {
-    console.log(`Hand ${handIndex + 1} Pinch action triggered`);
-    // 핀치에 따른 추가 동작 로직 구현
-    this.scene.background = new THREE.Color(0x00ff00);
   }
 
   add3DText(text: string): void {

@@ -14,7 +14,6 @@ export class VrPageComponent {
 
   public ngAfterViewInit() {
     this.vrscene.initVrService(this.vrViewport.nativeElement, 'ee');
-    document.body.appendChild(VRButton.createButton(this.vrscene.renderer));
   }
   public ngOnDestroy() {
     this.vrscene.destroyAnimation();
