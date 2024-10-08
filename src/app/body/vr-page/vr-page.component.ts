@@ -13,7 +13,7 @@ export class VrPageComponent {
   constructor(private vrscene: VrScenegraphService) {}
 
   public ngAfterViewInit() {
-    this.vrscene.initVrService(this.vrViewport.nativeElement, 'ee');
+    this.vrscene.initVrService(this.vrViewport.nativeElement);
   }
   public ngOnDestroy() {
     this.vrscene.destroyAnimation();
