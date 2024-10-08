@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { VrScenegraphService } from '../../../service/three-service/scene-service/vr-scene/vr-scenegraph.service';
+import { WebSocket } from 'ws';
 @Component({
   selector: 'app-vr-page',
   templateUrl: './vr-page.component.html',
@@ -12,10 +13,12 @@ export class VrPageComponent {
   constructor(private vrscene: VrScenegraphService) {}
 
   public ngAfterViewInit() {
-    this.vrscene.initVrService(this.vrViewport.nativeElement);
+    this.vrscene.initVrService(
+      this.vrViewport.nativeElement,
+      '당신의 나이는 25살입니다! (2000년생)'
+    );
     document.body.appendChild(VRButton.createButton(this.vrscene.renderer));
   }
-
   public ngOnDestroy() {
     this.vrscene.destroyAnimation();
   }
