@@ -13,10 +13,7 @@ export class VrPageComponent {
   constructor(private vrscene: VrScenegraphService) {}
 
   public ngAfterViewInit() {
-    this.vrscene.initVrService(
-      this.vrViewport.nativeElement,
-      "Your research interest is in computer vision in virtual reality environments at KAIST's UVR Lab."
-    );
+    this.vrscene.initVrService(this.vrViewport.nativeElement, 'ee');
     document.body.appendChild(VRButton.createButton(this.vrscene.renderer));
   }
   public ngOnDestroy() {

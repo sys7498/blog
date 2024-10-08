@@ -89,8 +89,27 @@ export class VrScenegraphService {
     this.createMovingSphere(text);
     this.createBlackSquare();
     this.add3DText(text);
+    this.detectPinch(hand1, 0);
+    this.detectPinch(hand2, 1);
     // 애니메이션 시작
     this.startAnimation();
+  }
+
+  private detectPinch(hand: THREE.Group, handIndex: number) {
+    hand.addEventListener('pinchstart', () => {
+      console.log(`Hand ${handIndex + 1} started pinching!`);
+      this.onPinch(handIndex);
+    });
+
+    hand.addEventListener('pinchend', () => {
+      console.log(`Hand ${handIndex + 1} stopped pinching!`);
+    });
+  }
+
+  private onPinch(handIndex: number) {
+    console.log(`Hand ${handIndex + 1} Pinch action triggered`);
+    // 핀치에 따른 추가 동작 로직 구현
+    this.scene.background = new THREE.Color(0x00ff00);
   }
 
   add3DText(text: string): void {
@@ -104,7 +123,7 @@ export class VrScenegraphService {
           height: 0.2,
           curveSegments: 12,
           bevelEnabled: true,
-          bevelThickness: 0.03,
+          bevelThickness: 0.01,
           bevelSize: 0.02,
           bevelOffset: 0,
           bevelSegments: 5,
@@ -132,8 +151,8 @@ export class VrScenegraphService {
     const geometry = new THREE.SphereGeometry(2, 128, 128);
 
     // Convert input text to unicode values
-    const unicodeValues = new Float32Array(10);
-    const length = Math.min(10, text.length);
+    const unicodeValues = new Float32Array(15);
+    const length = Math.min(15, text.length);
     for (let i = 0; i < length; i++) {
       unicodeValues[i] = text.charCodeAt(i);
     }
@@ -143,7 +162,7 @@ export class VrScenegraphService {
       varying vec3 vPosition;
 
       uniform float time;
-      uniform float unicodeValues[10];
+      uniform float unicodeValues[15];
       uniform int length;
 
       // Simplex Noise function
