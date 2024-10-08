@@ -122,18 +122,18 @@ export class VrScenegraphService {
 
   private updateUnicodeValues() {
     this.textMesh.removeFromParent();
-    const newUnicodeValues = new Float32Array(15);
-    const length = Math.min(
-      15,
-      Math.max(1, this.answers[this.nowAnswerOrder].split('').length / 5)
-    );
-    for (let i = 0; i < length; i++) {
-      newUnicodeValues[i] = this.answers[this.nowAnswerOrder].charCodeAt(i); // 새로운 임의의 값 생성
-    }
-
-    // 셰이더에 값 업데이트
-    this.material.uniforms['unicodeValues'].value = newUnicodeValues;
-    this.material.uniforms['length'].value = length;
+    //const newUnicodeValues = new Float32Array(15);
+    //const length = Math.min(
+    //  15,
+    //  Math.max(1, this.answers[this.nowAnswerOrder].split('').length / 5)
+    //);
+    //for (let i = 0; i < length; i++) {
+    //  newUnicodeValues[i] = this.answers[this.nowAnswerOrder].charCodeAt(i); // 새로운 임의의 값 생성
+    //}
+    //
+    //// 셰이더에 값 업데이트
+    //this.material.uniforms['unicodeValues'].value = newUnicodeValues;
+    //this.material.uniforms['length'].value = length;
 
     this.nowAnswerOrder++;
     this.update3DText(this.answers[this.nowAnswerOrder]);
@@ -487,7 +487,11 @@ void main() {
   private startAnimation() {
     const animationCallback = () => {
       this.material.uniforms['time'].value += 0.001;
-
+      this.sphere.scale.set(
+        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3,
+        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3,
+        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3
+      );
       // 씬 렌더링
       this.renderer.render(this.scene, this.camera);
 
