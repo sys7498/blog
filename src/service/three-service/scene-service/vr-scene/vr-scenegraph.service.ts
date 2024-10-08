@@ -37,6 +37,7 @@ export class VrScenegraphService {
     });
     this.renderer.setPixelRatio(Math.min(3, window.devicePixelRatio));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.xr.setFramebufferScaleFactor(2.0);
     this.renderer.xr.enabled = true;
 
     // controllers
@@ -87,17 +88,17 @@ export class VrScenegraphService {
     this.scene.add(this.light);
     this.createMovingSphere(text);
     this.createBlackSquare();
-    this.add3DText();
+    this.add3DText(text);
     // 애니메이션 시작
     this.startAnimation();
   }
 
-  add3DText(): void {
+  add3DText(text: string): void {
     const loader = new FontLoader();
     loader.load(
       'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
       (font) => {
-        const geometry = new TextGeometry('hello', {
+        const geometry = new TextGeometry(text, {
           font: font,
           size: 1,
           height: 0.2,
@@ -119,15 +120,16 @@ export class VrScenegraphService {
           const textWidth = boundingBox.max.x - boundingBox.min.x;
           geometry.translate(-textWidth / 2, 0, 0);
         }
-        textMesh.lookAt(this.camera.position);
+
         this.scene.add(textMesh);
+        textMesh.lookAt(this.camera.position.sub(textMesh.position));
         textMesh.position.set(0, 10, -30);
       }
     );
   }
 
   private createMovingSphere(text: string) {
-    const geometry = new THREE.SphereGeometry(2, 64, 64);
+    const geometry = new THREE.SphereGeometry(2, 128, 128);
 
     // Convert input text to unicode values
     const unicodeValues = new Float32Array(10);
@@ -291,7 +293,7 @@ export class VrScenegraphService {
       },
     });
     this.sphere = new THREE.Mesh(geometry, this.material);
-    this.sphere.position.set(0, 0, -30);
+    this.sphere.position.set(0, -5, -30);
     this.scene.add(this.sphere);
   }
 

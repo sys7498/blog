@@ -15,7 +15,7 @@ export class VrPageComponent {
   public ngAfterViewInit() {
     this.vrscene.initVrService(
       this.vrViewport.nativeElement,
-      '당신의 나이는 25살입니다! (2000년생)'
+      "Your research interest is in computer vision in virtual reality environments at KAIST's UVR Lab."
     );
     document.body.appendChild(VRButton.createButton(this.vrscene.renderer));
   }
