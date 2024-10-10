@@ -4,7 +4,7 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 import { XRHandModelFactory } from 'three/examples/jsm/webxr/XRHandModelFactory.js';
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh.js';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 @Injectable({
@@ -30,8 +30,10 @@ export class VrScenegraphService {
     'My house is in Korea, where I am currently studying at KAIST.',
     'My research topic focuses on computer vision in virtual reality environments,\n specifically within the context of the UVR Lab at KAIST.',
   ];
+  public answerGeometryArray: TextGeometry[] = [];
   public nowAnswerOrder = 0;
   public textMesh: THREE.Mesh = undefined as unknown as THREE.Mesh;
+  public font: Font = undefined as unknown as Font;
   constructor() {}
 
   /** 초기화 메소드 */
@@ -121,7 +123,7 @@ export class VrScenegraphService {
   }
 
   private updateUnicodeValues() {
-    this.textMesh.removeFromParent();
+    //this.textMesh.removeFromParent();
     //const newUnicodeValues = new Float32Array(15);
     //const length = Math.min(
     //  15,
@@ -146,27 +148,32 @@ export class VrScenegraphService {
     loader.load(
       'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
       (font) => {
-        const geometry = new TextGeometry(text, {
-          font: font,
-          size: 1,
-          height: 0.2,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 0.01,
-          bevelSize: 0.02,
-          bevelOffset: 0,
-          bevelSegments: 5,
-        });
+        this.font = font;
+        for (let i = 0; i < this.answers.length; i++) {
+          this.answerGeometryArray.push(
+            new TextGeometry(this.answers[i], {
+              font: font,
+              size: 1,
+              height: 0.2,
+              curveSegments: 12,
+              bevelEnabled: true,
+              bevelThickness: 0.01,
+              bevelSize: 0.02,
+              bevelOffset: 0,
+              bevelSegments: 5,
+            })
+          );
+        }
 
         const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-        this.textMesh = new THREE.Mesh(geometry, material);
+        this.textMesh = new THREE.Mesh(this.answerGeometryArray[0], material);
 
-        geometry.computeBoundingBox();
-        const boundingBox = geometry.boundingBox;
+        this.answerGeometryArray[0].computeBoundingBox();
+        const boundingBox = this.answerGeometryArray[0].boundingBox;
 
         if (boundingBox) {
           const textWidth = boundingBox.max.x - boundingBox.min.x;
-          geometry.translate(-textWidth / 2, 0, 0);
+          this.answerGeometryArray[0].translate(-textWidth / 2, 0, 0);
         }
 
         this.scene.add(this.textMesh);
@@ -177,38 +184,23 @@ export class VrScenegraphService {
   }
 
   update3DText(text: string): void {
-    const loader = new FontLoader();
-    loader.load(
-      'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
-      (font) => {
-        const geometry = new TextGeometry(text, {
-          font: font,
-          size: 1,
-          height: 0.2,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 0.01,
-          bevelSize: 0.02,
-          bevelOffset: 0,
-          bevelSegments: 5,
-        });
+    this.answerGeometryArray[this.nowAnswerOrder].computeBoundingBox();
+    const boundingBox =
+      this.answerGeometryArray[this.nowAnswerOrder].boundingBox;
 
-        const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-        this.textMesh = new THREE.Mesh(geometry, material);
+    if (boundingBox) {
+      const textWidth = boundingBox.max.x - boundingBox.min.x;
+      this.answerGeometryArray[this.nowAnswerOrder].translate(
+        -textWidth / 2,
+        0,
+        0
+      );
+    }
 
-        geometry.computeBoundingBox();
-        const boundingBox = geometry.boundingBox;
-
-        if (boundingBox) {
-          const textWidth = boundingBox.max.x - boundingBox.min.x;
-          geometry.translate(-textWidth / 2, 0, 0);
-        }
-        this.scene.add(this.textMesh);
-        //this.textMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-        //this.textMesh.lookAt(this.camera.position.sub(this.textMesh.position));
-        this.textMesh.position.set(0, 15, -30);
-      }
-    );
+    // 이미 생성된 경우, geometry만 업데이트
+    this.textMesh.geometry.dispose(); // 기존 geometry 메모리 해제
+    this.textMesh.geometry = this.answerGeometryArray[this.nowAnswerOrder]; // 새 geometry 적용
+    this.textMesh.position.set(0, 15, -30);
   }
 
   private createMovingSphere(text: string) {
@@ -488,9 +480,9 @@ void main() {
     const animationCallback = () => {
       this.material.uniforms['time'].value += 0.001;
       this.sphere.scale.set(
-        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3,
-        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3,
-        Math.sin(this.material.uniforms['time'].value * Math.PI) + 0.3
+        Math.sin((this.material.uniforms['time'].value * Math.PI) / 4) + 0.3,
+        Math.sin((this.material.uniforms['time'].value * Math.PI) / 4) + 0.3,
+        Math.sin((this.material.uniforms['time'].value * Math.PI) / 4) + 0.3
       );
       // 씬 렌더링
       this.renderer.render(this.scene, this.camera);
