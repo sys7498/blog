@@ -1,30 +1,20 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { ScenegraphService } from '../../../service/three-service/scene-service/main-scene/scenegraph.service';
-import { VRButton } from 'three/examples/jsm/webxr/VRButton';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { PROJECTS } from '../../../data/projects';
+
 @Component({
   selector: 'app-project-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './project-page.component.html',
   styleUrl: './project-page.component.scss',
 })
 export class ProjectPageComponent {
-  @ViewChild('viewport') viewport: ElementRef =
-    undefined as unknown as ElementRef;
-  constructor(private scene: ScenegraphService) {}
+  public readonly projects = PROJECTS;
+  constructor(private router: Router) {}
 
-  public ngAfterViewInit() {
-    this.scene.initService(this.viewport.nativeElement);
-  }
-
-  public ngOnDestroy() {
-    this.scene.destroyAnimation();
-  }
-
-  @HostListener('mousemove', ['$event'])
-  private onMouseMove(event: MouseEvent) {}
-  @HostListener('window:resize')
-  private onWindowResize() {
-    this.scene.onResize();
+  public open(slug: string) {
+    this.router.navigate(['/project', slug]);
   }
 }

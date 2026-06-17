@@ -1,19 +1,20 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { HomePageComponent } from './body/home-page/home-page.component';
+import { BlogPageComponent } from './body/blog-page/blog-page.component';
 import { MainPageComponent } from './body/main-page/main-page.component';
-import { PostPageComponent } from './body/post-page/post-page.component';
-import { NgModule } from '@angular/core';
-import { ProjectPageComponent } from './body/project-page/project-page.component';
+import { ProjectDetailComponent } from './body/project-page/project-detail/project-detail.component';
+import { PostDetailComponent } from './body/post-page/post-detail/post-detail.component';
 import { VrPageComponent } from './body/vr-page/vr-page.component';
 
 export const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'post', component: PostPageComponent },
-  { path: 'project', component: ProjectPageComponent },
+  // 싱글 페이지(about/education/news/publication/project 섹션) — 헤더가 스크롤 이동
+  { path: '', component: HomePageComponent },
+  // 블로그
+  { path: 'posts', component: BlogPageComponent },
+  { path: 'post/:slug', component: PostDetailComponent },
+  // 프로젝트 데모 / VR
+  { path: 'project/:slug', component: ProjectDetailComponent },
   { path: 'vr', component: VrPageComponent },
+  { path: 'sphere', component: MainPageComponent }, // 3D 구 (보존, 기본 아님)
+  { path: '**', redirectTo: '' },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

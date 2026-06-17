@@ -1,0 +1,70 @@
+%==============================================================================
+% Yoonseok Shin — Academic CV
+%
+% 템플릿: moderncv (TeX Live / Overleaf 에 기본 내장 → 추가 파일 없이 바로 컴파일)
+%   - moderncv 는 가장 널리 쓰이는 학술 CV 클래스 중 하나입니다.
+%   - 더 화려한 모던 스타일을 원하면 README.md 의 "Awesome-CV" 안내를 참고하세요.
+%
+% 컴파일:
+%   1) Overleaf 에 이 파일을 올리고 컴파일러를 XeLaTeX (또는 pdfLaTeX) 로 설정
+%   2) 또는 로컬:  xelatex cv.tex     (latexmk -xelatex cv.tex 권장)
+%   3) 생성된 cv.pdf 를  src/assets/Yoonseok_Shin_CV.pdf  로 복사하면
+%      웹사이트 About 의 "Download CV" 버튼과 연결됩니다.
+%==============================================================================
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+\moderncvstyle{banking}   % classic / casual / banking / oldstyle / fancy
+\moderncvcolor{blue}      % black / blue / burgundy / green / grey / orange / purple / red
+
+\usepackage[scale=0.84]{geometry}
+\usepackage[T1]{fontenc}
+
+% ---- Personal data ----
+\name{Yoonseok}{Shin}
+\title{M.S. Student, Culture Technology — UVR Lab, KAIST}
+\email{sys7498@kaist.ac.kr}
+\address{Graduate School of Culture Technology, KAIST}{Daejeon, Republic of Korea}{}
+\social[linkedin]{yoonseok-shin-562055310}
+\social[github]{sys7498}
+\extrainfo{\httplink[Google Scholar]{scholar.google.com/citations?user=g8hg2zwAAAAJ}}
+
+\begin{document}
+\makecvtitle
+
+%-------------------------------------------------------------------------------
+\section{Research Interests}
+\cvitem{}{Computer vision in virtual reality environments, immersive XR interaction,
+and interactive 3D/WebXR systems.}
+
+%-------------------------------------------------------------------------------
+\section{Education}
+\cventry{2023--Present}{M.S. in Culture Technology}{KAIST, Graduate School of Culture Technology}{Daejeon, Korea}{}
+  {UVR Lab — Computer vision in virtual reality environments.}
+\cventry{2019--2023}{B.S.}{Undergraduate Institution}{Korea}{}{\textit{Edit this entry in cv/cv.tex}}
+
+%-------------------------------------------------------------------------------
+\section{Experience}
+\cventry{2023--Present}{Graduate Researcher}{UVR Lab, KAIST}{Daejeon, Korea}{}
+  {Research on computer vision and interaction in immersive VR/XR.}
+
+%-------------------------------------------------------------------------------
+\section{Publications}
+\cventry{2026}{Real-Time Superquadric Representation of Cuboids and Cylinders Using Instant Surface Normal Map for Dynamic Object Integration in AR}{}{}{}
+  {Y.~Lim, \textbf{Y.~Shin}, W.~Woo. \emph{IEEE VR 2026 (Abstracts and Workshops).}}
+\cventry{2025}{Visuo-Tactile Feedback with Hand Outline Styles for Modulating Affective Roughness Perception}{}{}{}
+  {M.~Baeck, \textbf{Y.~Shin}, D.~Kim, H.~Lee, S.~H.~Yoon, W.~Woo. \emph{IEEE TVCG.} \httplink[arXiv:2508.13504]{arxiv.org/abs/2508.13504}}
+\cventry{2025}{Collaborative Scene Mood Authoring with Voice-driven Multimodal Feedback Design in Virtual Reality}{}{}{}
+  {J.~Hong, M.~Baeck, S.~Kim, \textbf{Y.~Shin}, W.~Woo. \emph{SIGGRAPH Asia 2025 XR.}}
+\cventry{2025}{Region-Guided Interactive Docent for Paintings in Mixed Reality}{}{}{}
+  {\textbf{Y.~Shin}, M.~Baeck, W.~Woo. \emph{IEEE ISMAR 2025 (Adjunct).}}
+
+%-------------------------------------------------------------------------------
+\section{Skills}
+\cvitem{Research}{Computer Vision, Virtual / Augmented Reality, Human--Computer Interaction}
+\cvitem{Engineering}{Three.js, WebXR, GLSL, TypeScript / Angular, Python, OpenCV}
+
+%-------------------------------------------------------------------------------
+\section{Interests}
+\cvitem{}{Cooking, coffee, and making things by hand (LEGO, models).}
+
+\end{document}

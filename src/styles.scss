@@ -1,9 +1,265 @@
-/* You can add global styles to this file, and also import other style files */
+/* 전역 스타일 — 기존 디자인 언어 유지: M PLUS 1 Code, 초경량(200), 흑/백, hover 시 굵기만 */
+html,
 body {
-    margin: 0;
-    overflow: hidden;
-    font-family: "M PLUS 1 Code", monospace;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
+  height: 100%;
+  margin: 0;
+  overflow: hidden; // 문서 스크롤 잠금 — 모든 스크롤은 .page 안에서. 헤더 고정 유지.
+}
+
+:root {
+  --mono: "JetBrains Mono", "M PLUS 1 Code", monospace;
+}
+
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 17px;
+  color: #111;
+  background: #fff;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s, color 0.15s;
+}
+a:hover {
+  opacity: 0.6; // 굵기 대신 — 레이아웃 시프트 없음
+}
+
+/* ---- 콘텐츠 페이지 공통 (about / publication / project / post) ---- */
+.page {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 48px 40px 96px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 28px 22px 80px;
+  }
+  .page-title {
+    font-size: 27px;
+  }
+  .prose {
+    font-size: 15px;
+  }
+  .prose pre {
+    font-size: 12px;
+  }
+}
+
+.page-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  // 배경 도형과 글이 겹쳐도 읽히도록 은은한 흰색 후광 (흰 배경에선 안 보임)
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0.95),
+    0 0 16px rgba(255, 255, 255, 0.8);
+}
+// 자체 배경이 있는 요소엔 후광 불필요
+.page-inner pre,
+.page-inner pre *,
+.page-inner .cover,
+.page-inner .cover *,
+.page-inner .thumb,
+.page-inner .thumb * {
+  text-shadow: none;
+}
+
+.page-title {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+
+.page-sub {
+  font-size: 14.5px;
+  color: #777;
+  margin: 0 0 40px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #999;
+  margin: 40px 0 14px;
+}
+
+.muted {
+  color: #888;
+}
+
+/* 미니멀 리스트 (날짜 · 제목, hover-bold) */
+.list {
+  display: block;
+}
+.list-item {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.list-item:hover {
+  transform: translateX(8px); // 굵기 대신 살짝 밀려나는 효과 (시프트 없음)
+}
+.list-item:hover .item-title {
+  color: #000;
+}
+.item-meta {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #999;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.item-title {
+  font-size: 19px;
+  font-weight: 500;
+}
+.item-summary {
+  font-size: 14.5px;
+  color: #666;
+  margin-top: 6px;
+  line-height: 1.65;
+}
+.item-tags {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
+/* 인라인 링크 묶음 */
+.linkrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.linkrow a {
+  color: #555;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 본문(마크다운 / 프로젝트 상세) */
+.prose {
+  font-size: 17.5px;
+  line-height: 1.85;
+  color: #1f1f1f;
+}
+.prose h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+}
+.prose h2 {
+  font-size: 23px;
+  font-weight: 600;
+  margin: 34px 0 12px;
+}
+.prose p {
+  margin: 0 0 16px;
+}
+.prose ul {
+  padding-left: 20px;
+}
+.prose li {
+  margin: 4px 0;
+}
+.prose a {
+  border-bottom: 1px solid #ccc;
+}
+.prose code {
+  font-family: var(--mono);
+  background: #f5f5f5;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 13.5px;
+}
+.prose pre {
+  background: #0f0f0f;
+  color: #eaeaea;
+  padding: 16px 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 28px;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+}
+.btn {
+  transition: background 0.15s, transform 0.1s;
+}
+.btn:hover {
+  background: #333;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ---- 인쇄(CV export): 페이지 크롬 숨기고 CV만 깔끔하게 ---- */
+@media print {
+  #header,
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body,
+  app-root,
+  #body {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .page {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+  .cv {
+    font-size: 11pt;
+  }
+  a {
+    color: #000;
+  }
 }

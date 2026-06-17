@@ -1,1 +1,15 @@
-<canvas #viewport id="viewport"></canvas>
+<div class="page">
+  <div class="page-inner">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-sub">Interactive prototypes & research demos. Click to open.</p>
+
+    <div class="list">
+      <div class="list-item" *ngFor="let p of projects" (click)="open(p.slug)">
+        <div class="item-meta">{{ p.year }}</div>
+        <div class="item-title">{{ p.title }}</div>
+        <div class="item-summary">{{ p.summary }}</div>
+        <div class="item-tags">{{ p.tags.join(' · ') }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,52 @@
 <div class="header-container">
-    <div class="header-title"> Y o o n </div>
-    <ng-container *ngFor="let pageName of pageKeys">
-        <app-text-button [content]="pageName" [clicked]="pages[pageName]" (onClickEvent)="onClickPageButton(pageName)"
-            #headerButtons></app-text-button>
-    </ng-container>
+    <div class="header-title" (click)="goHome()">Y o o n</div>
+
+    <!-- 넓은 화면: About / Posts + hover 드롭다운 -->
+    <nav class="nav-wide">
+        <div class="nav-item" [class.open]="openMenu === 'about'">
+            <button class="nav-link" [class.active]="aboutActive" (click)="goHome()">About</button>
+            <div class="nav-menu">
+                <a *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
+                    (click)="go(s.id)">{{ s.label }}</a>
+            </div>
+        </div>
+
+        <div class="nav-item" [class.open]="openMenu === 'posts'">
+            <button class="nav-link" [class.active]="postsActive" (click)="goPosts()">Posts</button>
+            <div class="nav-menu posts-menu">
+                <div class="pm-head">Recent</div>
+                <a *ngFor="let p of recentPosts" class="menu-row post-row" (click)="openPost(p.slug)">
+                    <span class="pm-date">{{ p.date }}</span>
+                    <span class="pm-title">{{ p.title }}</span>
+                </a>
+                <p class="pm-empty" *ngIf="!recentPosts.length">No posts yet.</p>
+                <a class="menu-row pm-all" (click)="goPosts()">Enter blog →</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 우측: Download CV -->
+    <button class="cv-btn" (click)="openCv()">
+        <svg class="cv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <path d="M7 10l5 5 5-5" />
+            <path d="M12 15V3" />
+        </svg>
+        Download CV
+    </button>
+
+    <!-- 좁은 화면: 햄버거 -->
+    <button class="hamburger" [class.open]="openMenu" (click)="toggleMenu('about', $event)" aria-label="menu">
+        <span></span><span></span><span></span>
+    </button>
+
+    <div class="mobile-menu" *ngIf="openMenu" (click)="$event.stopPropagation()">
+        <div class="mm-label">About</div>
+        <a *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
+            (click)="go(s.id)">{{ s.label }}</a>
+        <div class="mm-label">Blog</div>
+        <a class="menu-row" (click)="goPosts()">Posts</a>
+        <a class="menu-row" (click)="openCv()">Download CV</a>
+    </div>
 </div>

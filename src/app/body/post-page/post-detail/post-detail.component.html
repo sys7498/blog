@@ -1,0 +1,16 @@
+<div class="page">
+  <div class="page-inner">
+    <a class="back-link" routerLink="/" [fragment]="'post'">← posts</a>
+
+    <ng-container *ngIf="!error; else missing">
+      <div class="item-meta" *ngIf="date">{{ date }}</div>
+      <div class="prose" *ngIf="!loading" [innerHTML]="html"></div>
+      <p class="muted" *ngIf="loading">Loading…</p>
+    </ng-container>
+
+    <ng-template #missing>
+      <h1 class="page-title">Not found</h1>
+      <p class="page-sub">This post could not be loaded.</p>
+    </ng-template>
+  </div>
+</div>

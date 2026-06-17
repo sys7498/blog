@@ -1,10 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ScenegraphService } from '../../service/three-service/scene-service/main-scene/scenegraph.service';
-import { HeaderComponent } from '../header/header.component';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-body',
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './body.component.html',
   styleUrl: './body.component.scss',
 })

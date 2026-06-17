@@ -1,0 +1,33 @@
+<div class="page">
+  <div class="page-inner">
+    <a class="back-link" routerLink="/" [fragment]="'project'">← projects</a>
+
+    <ng-container *ngIf="project; else notfound">
+      <div class="item-meta">{{ project.year }}</div>
+      <h1 class="page-title">{{ project.title }}</h1>
+      <p class="page-sub">{{ project.tags.join(' · ') }}</p>
+
+      <div class="prose">
+        <p *ngFor="let para of (project.description?.length ? project.description : [project.summary])">{{ para }}</p>
+      </div>
+
+      <div class="linkrow" *ngIf="project.links?.length || project.internalRoute">
+        <a *ngIf="project.internalRoute" [routerLink]="project.internalRoute">Open demo →</a>
+        <a *ngFor="let l of project.links" [href]="l.url" target="_blank" rel="noopener">{{ l.label }}</a>
+      </div>
+
+      <!-- 임베드 가능한 인터랙티브 데모 -->
+      <div class="embed" *ngIf="safeEmbed">
+        <div class="section-label">Live demo</div>
+        <iframe [src]="safeEmbed" title="{{ project.title }} demo"
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
+          loading="lazy" allow="xr-spatial-tracking; fullscreen; accelerometer; gyroscope"></iframe>
+      </div>
+    </ng-container>
+
+    <ng-template #notfound>
+      <h1 class="page-title">Not found</h1>
+      <p class="page-sub">No project matches this URL.</p>
+    </ng-template>
+  </div>
+</div>

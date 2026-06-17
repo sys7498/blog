@@ -1,1 +1,19 @@
 <canvas #viewport id="viewport"></canvas>
+
+<!-- 랜딩 히어로: 좌측 소개 (구는 우측에서 마우스에 반응) -->
+<div class="hero">
+  <div class="hero-eyebrow">computer vision · virtual reality</div>
+  <h1 class="hero-name">{{ profile.name }}</h1>
+  <div class="hero-role">{{ profile.role }} — {{ profile.affiliation }}</div>
+  <p class="hero-tagline">{{ profile.tagline }}</p>
+
+  <div class="hero-explore">
+    <a *ngFor="let item of explore" class="explore-link" (click)="go(item.path)">
+      {{ item.label }}<span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="hero-links">
+    <a *ngFor="let l of profile.links" [href]="l.url" target="_blank" rel="noopener">{{ l.label }}</a>
+  </div>
+</div>

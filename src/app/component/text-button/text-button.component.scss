@@ -1,14 +1,29 @@
 .y-button {
-    font-size: 20px;
-    margin-left: 25px;
-    margin-right: 25px;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-bottom: 4px;
     cursor: pointer;
 }
 
-.y-button:hover {
-    font-weight: 400;
+/* 굵기 대신 언더라인 슬라이드 — 레이아웃 시프트 없음 */
+.y-button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.22s ease;
 }
 
-.y-button-clicked {
-    font-weight: 400;
+.y-button:hover::after,
+.y-button-clicked::after {
+    transform: scaleX(1);
 }

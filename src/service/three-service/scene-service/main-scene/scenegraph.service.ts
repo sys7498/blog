@@ -14,7 +14,27 @@ export class ScenegraphService {
   public renderer: THREE.WebGLRenderer =
     undefined as unknown as THREE.WebGLRenderer;
   public animationID: number = 0;
+  // 마우스 목표값(-1~1). 애니메이션 루프에서 부드럽게 따라감.
+  public mouseTarget = new THREE.Vector2(0, 0);
+  // 구의 가로 배치 오프셋 (넓은 화면에선 우측, 좁은 화면에선 가운데)
+  public sphereOffsetX = 0;
   constructor() {}
+
+  /** 마우스 이동을 정규화(-1~1)해서 전달 */
+  public setMouse(clientX: number, clientY: number) {
+    this.mouseTarget.set(
+      (clientX / window.innerWidth) * 2 - 1,
+      -((clientY / window.innerHeight) * 2 - 1)
+    );
+  }
+
+  /** 화면 폭에 따라 구를 우측/가운데로 배치 (좌측 소개 텍스트 공간 확보) */
+  public setLayout(width: number) {
+    this.sphereOffsetX = width >= 900 ? 1.7 : width >= 640 ? 0.9 : 0;
+    if (this.sphere) {
+      this.sphere.position.x = this.sphereOffsetX;
+    }
+  }
 
   public initService(container: HTMLCanvasElement) {
     this.scene = new THREE.Scene();
@@ -45,6 +65,7 @@ export class ScenegraphService {
       varying vec3 vPosition;
 
       uniform float time;
+      uniform vec2 mouse;
 
       void main() {
         vNormal = normalize(normalMatrix * normal);
@@ -63,6 +84,11 @@ export class ScenegraphService {
         float frequency = 50.0;
 
         float displacement = (((cos(frequency * degree_x) + 0.1) * (sin(frequency * degree_y) + 0.1) * (cos(frequency * degree_z) + 0.1) * (cos(frequency * degree_xyz) + 0.1)) + 0.1);
+
+        // 커서가 향하는 쪽의 가시를 더 크게 — 구체를 "건드리는" 느낌
+        vec3 mouseDir = normalize(vec3(mouse * 1.5, 1.0));
+        float towards = dot(normalize(position), mouseDir); // -1~1
+        displacement *= (1.0 + 0.9 * max(towards, 0.0));
 
         vec3 displacedPosition = position + vNormal * displacement;
 
@@ -107,10 +133,11 @@ export class ScenegraphService {
         lightPosition: { value: new THREE.Vector3(0, 0, 100) },
         viewPosition: { value: new THREE.Vector3(0, 0, 5) },
         time: { value: 0.0 },
+        mouse: { value: new THREE.Vector2(0, 0) },
       },
     });
     this.sphere = new THREE.Mesh(geometry, this.material);
-    //this.sphere.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 4);
+    this.sphere.position.x = this.sphereOffsetX;
     this.scene.add(this.sphere);
     startAnimation(this);
   }
@@ -119,6 +146,7 @@ export class ScenegraphService {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
+    this.setLayout(window.innerWidth);
   }
 
   public destroyAnimation() {
@@ -129,11 +157,21 @@ export class ScenegraphService {
 /** 애니메이션 함수 */
 const startAnimation = function (scene: ScenegraphService) {
   const animationFrame = function () {
-    // Rotate the cube
-    //scene.sphere.rotation.x += 0.01;
-    //scene.sphere.rotation.y += 0.01;
     scene.material.uniforms['time'].value += 0.001;
-    // Render the scene with the camera
+
+    // 마우스 uniform 을 목표값으로 부드럽게 보간
+    const m = scene.material.uniforms['mouse'].value as THREE.Vector2;
+    m.lerp(scene.mouseTarget, 0.08);
+
+    // 구체를 커서 쪽으로 살짝 기울임
+    scene.sphere.rotation.y += (scene.mouseTarget.x * 0.6 - scene.sphere.rotation.y) * 0.05;
+    scene.sphere.rotation.x += (-scene.mouseTarget.y * 0.6 - scene.sphere.rotation.x) * 0.05;
+
+    // 카메라 parallax — 마우스를 따라 시점이 미세하게 움직여 깊이감
+    scene.camera.position.x += (scene.mouseTarget.x * 0.5 - scene.camera.position.x) * 0.04;
+    scene.camera.position.y += (scene.mouseTarget.y * 0.5 - scene.camera.position.y) * 0.04;
+    scene.camera.lookAt(scene.sphere.position.x * 0.5, 0, 0);
+
     scene.renderer.render(scene.scene, scene.camera);
     scene.animationID = requestAnimationFrame(animationFrame);
   };

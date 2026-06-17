@@ -1,19 +1,259 @@
 .header-container {
+    position: relative;
     width: 100%;
     height: 100%;
     padding-left: 40px;
     padding-right: 40px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+    background: #fff;
 }
 
 .header-title {
-    margin-right: 50px;
-    font-size: 25px;
-    font-weight: 200;
+    margin-right: 44px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+}
+.header-title:hover {
+    opacity: 0.55;
 }
 
-.header-button {
-    font-size: 20px;
-    margin-right: 50px;
+.nav-wide {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* nav item + hover 드롭다운 */
+.nav-item {
+    position: relative;
+}
+.nav-link {
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 500;
+    color: #444;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.15s, color 0.15s;
+}
+.nav-link .ni {
+    font-size: 13px;
+}
+.nav-link:hover {
+    background: #f5f5f3;
+    color: #000;
+}
+.nav-link.active {
+    color: #000;
+    font-weight: 700;
+}
+
+.nav-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 210px;
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.28);
+    padding: 8px;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    z-index: 120;
+}
+/* hover 시 사라지지 않도록 다리(bridge) */
+.nav-item::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+.nav-item:hover .nav-menu,
+.nav-item.open .nav-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.13s, color 0.13s;
+}
+.menu-row:hover {
+    background: #f5f5f3;
+    color: #000;
+    opacity: 1;
+}
+.menu-row.active {
+    background: #f1f1ef;
+    color: #000;
+    font-weight: 600;
+}
+.menu-row .mi {
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+}
+
+/* posts 드롭다운 */
+.posts-menu {
+    min-width: 300px;
+}
+.pm-head {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #bbb;
+    padding: 6px 12px 4px;
+}
+.post-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+.pm-date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: #aaa;
+}
+.pm-title {
+    font-size: 14.5px;
+    line-height: 1.35;
+}
+.pm-empty {
+    padding: 8px 12px;
+    color: #aaa;
+    font-size: 14px;
+    margin: 0;
+}
+.pm-all {
+    margin-top: 4px;
+    border-top: 1px solid #f0f0f0;
+    border-radius: 0 0 8px 8px;
+    color: #2b59ff;
+    font-weight: 600;
+    justify-content: flex-start;
+}
+
+/* 우측 Download CV 버튼 */
+.cv-btn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #111;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, transform 0.1s;
+}
+.cv-btn:hover {
+    background: #333;
+}
+.cv-btn:active {
+    transform: translateY(1px);
+}
+.cv-ico {
+    width: 16px;
+    height: 16px;
+}
+
+/* 햄버거 + 모바일 메뉴 */
+.hamburger {
+    display: none;
+    margin-left: auto;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #222;
+    transition: transform 0.22s, opacity 0.22s;
+}
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    margin-top: 6px;
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.28);
+    padding: 10px;
+    min-width: 220px;
+    z-index: 120;
+}
+.mm-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #bbb;
+    padding: 10px 12px 4px;
+}
+
+@media (max-width: 680px) {
+    .header-container {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+    .nav-wide {
+        display: none;
+    }
+    .cv-btn {
+        display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
 }

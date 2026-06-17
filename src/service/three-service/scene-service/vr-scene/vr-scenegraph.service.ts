@@ -123,22 +123,9 @@ export class VrScenegraphService {
   }
 
   private updateUnicodeValues() {
-    //this.textMesh.removeFromParent();
-    //const newUnicodeValues = new Float32Array(15);
-    //const length = Math.min(
-    //  15,
-    //  Math.max(1, this.answers[this.nowAnswerOrder].split('').length / 5)
-    //);
-    //for (let i = 0; i < length; i++) {
-    //  newUnicodeValues[i] = this.answers[this.nowAnswerOrder].charCodeAt(i); // 새로운 임의의 값 생성
-    //}
-    //
-    //// 셰이더에 값 업데이트
-    //this.material.uniforms['unicodeValues'].value = newUnicodeValues;
-    //this.material.uniforms['length'].value = length;
-
-    this.nowAnswerOrder++;
-    this.update3DText(this.answers[this.nowAnswerOrder]);
+    // 마지막 답변까지 가면 처음으로 순환 (범위 초과로 undefined 접근하던 버그 수정)
+    this.nowAnswerOrder = (this.nowAnswerOrder + 1) % this.answers.length;
+    this.update3DText();
   }
 
   private onPinchEnd() {}
@@ -150,31 +137,32 @@ export class VrScenegraphService {
       (font) => {
         this.font = font;
         for (let i = 0; i < this.answers.length; i++) {
-          this.answerGeometryArray.push(
-            new TextGeometry(this.answers[i], {
-              font: font,
-              size: 1,
-              height: 0.2,
-              curveSegments: 12,
-              bevelEnabled: true,
-              bevelThickness: 0.01,
-              bevelSize: 0.02,
-              bevelOffset: 0,
-              bevelSegments: 5,
-            })
-          );
+          const geometry = new TextGeometry(this.answers[i], {
+            font: font,
+            size: 1,
+            height: 0.2,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.01,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+          });
+
+          // 각 텍스트를 생성 시점에 한 번만 가운데 정렬
+          // (전환할 때마다 translate 하던 누적 이동 버그 방지)
+          geometry.computeBoundingBox();
+          const boundingBox = geometry.boundingBox;
+          if (boundingBox) {
+            const textWidth = boundingBox.max.x - boundingBox.min.x;
+            geometry.translate(-textWidth / 2, 0, 0);
+          }
+
+          this.answerGeometryArray.push(geometry);
         }
 
         const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
         this.textMesh = new THREE.Mesh(this.answerGeometryArray[0], material);
-
-        this.answerGeometryArray[0].computeBoundingBox();
-        const boundingBox = this.answerGeometryArray[0].boundingBox;
-
-        if (boundingBox) {
-          const textWidth = boundingBox.max.x - boundingBox.min.x;
-          this.answerGeometryArray[0].translate(-textWidth / 2, 0, 0);
-        }
 
         this.scene.add(this.textMesh);
         this.textMesh.lookAt(this.camera.position.sub(this.textMesh.position));
@@ -183,23 +171,14 @@ export class VrScenegraphService {
     );
   }
 
-  update3DText(text: string): void {
-    this.answerGeometryArray[this.nowAnswerOrder].computeBoundingBox();
-    const boundingBox =
-      this.answerGeometryArray[this.nowAnswerOrder].boundingBox;
-
-    if (boundingBox) {
-      const textWidth = boundingBox.max.x - boundingBox.min.x;
-      this.answerGeometryArray[this.nowAnswerOrder].translate(
-        -textWidth / 2,
-        0,
-        0
-      );
+  update3DText(): void {
+    // 폰트 로드가 끝나기 전에 호출되면 무시
+    if (!this.answerGeometryArray.length || !this.textMesh) {
+      return;
     }
 
-    // 이미 생성된 경우, geometry만 업데이트
-    this.textMesh.geometry.dispose(); // 기존 geometry 메모리 해제
-    this.textMesh.geometry = this.answerGeometryArray[this.nowAnswerOrder]; // 새 geometry 적용
+    // 이미 생성된 geometry만 교체 (기존 것은 메모리 해제하지 않음 — 재사용하므로)
+    this.textMesh.geometry = this.answerGeometryArray[this.nowAnswerOrder];
     this.textMesh.position.set(0, 15, -30);
   }
 

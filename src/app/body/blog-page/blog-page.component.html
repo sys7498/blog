@@ -1,0 +1,25 @@
+<div class="page">
+  <div class="page-inner">
+    <div class="blog-head">
+      <div class="eyebrow">✍️ blog</div>
+      <h1 class="blog-title">Posts</h1>
+      <p class="blog-sub">A lab notebook — informal notes, write-ups, and the occasional coffee tangent.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" *ngFor="let p of posts; let i = index" (click)="open(p.slug)">
+        <div class="cover" [style.background]="cover(i)">
+          <span class="cover-num">{{ (i + 1) < 10 ? '0' : '' }}{{ i + 1 }}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">{{ p.date }}</div>
+          <h2 class="card-title">{{ p.title }}</h2>
+          <p class="card-summary" *ngIf="p.summary">{{ p.summary }}</p>
+          <span class="card-read">read →</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="muted" *ngIf="!posts.length">No posts yet.</p>
+  </div>
+</div>

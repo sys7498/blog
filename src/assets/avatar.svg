@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" role="img" aria-label="Portrait placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f2f0"/>
+      <stop offset="1" stop-color="#e4e4e0"/>
+    </linearGradient>
+    <clipPath id="round"><rect width="480" height="480" rx="16"/></clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="480" height="480" fill="url(#bg)"/>
+    <!-- shoulders -->
+    <path d="M80 480 C80 360 160 320 240 320 C320 320 400 360 400 480 Z" fill="#c9c9c4"/>
+    <!-- head -->
+    <circle cx="240" cy="200" r="98" fill="#b9b9b3"/>
+    <!-- initials -->
+    <text x="240" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace"
+      font-size="78" fill="#fbfbf9" font-weight="600" letter-spacing="2">YS</text>
+    <!-- dummy badge -->
+    <text x="240" y="452" text-anchor="middle" font-family="'JetBrains Mono', monospace"
+      font-size="16" fill="#8a8a85" letter-spacing="3">DUMMY PHOTO</text>
+  </g>
+</svg>

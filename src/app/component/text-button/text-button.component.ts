@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-text-button',
+  standalone: true,
+  imports: [NgClass],
   templateUrl: './text-button.component.html',
   styleUrl: './text-button.component.scss',
 })

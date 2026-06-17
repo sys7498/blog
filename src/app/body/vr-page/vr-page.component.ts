@@ -1,9 +1,10 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { VrScenegraphService } from '../../../service/three-service/scene-service/vr-scene/vr-scenegraph.service';
-import { WebSocket } from 'ws';
+
 @Component({
   selector: 'app-vr-page',
+  standalone: true,
+  imports: [],
   templateUrl: './vr-page.component.html',
   styleUrl: './vr-page.component.scss',
 })
@@ -19,9 +20,9 @@ export class VrPageComponent {
     this.vrscene.destroyAnimation();
   }
   @HostListener('mousemove', ['$event'])
-  private onMouseMove(event: MouseEvent) {}
+  public onMouseMove(event: MouseEvent) {}
   @HostListener('window:resize')
-  private onWindowResize() {
+  public onWindowResize() {
     this.vrscene.onResize();
   }
 }
