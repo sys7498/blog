@@ -52,7 +52,7 @@
         <div class="entry-period">{{ p.year }}</div>
         <div class="entry-main">
           <div class="entry-title">{{ p.title }}</div>
-          <div class="entry-org">{{ p.authors }}</div>
+          <div class="entry-org" [innerHTML]="p.authors"></div>
           <div class="entry-venue">{{ p.venue }}</div>
           <div class="linkrow" *ngIf="p.links?.length">
             <a *ngFor="let l of p.links" [href]="l.url" target="_blank" rel="noopener">{{ l.label }}</a>

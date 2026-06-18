@@ -98,16 +98,16 @@ export const PROFILE: Profile = {
   interests: ['Cooking', 'Coffee', 'Hands-on making'],
   news: [
     {
-      date: '2026.05',
-      text: 'Paper accepted to IEEE VR 2026 (superquadric representation in AR).',
+      date: 'YYYY.MM',
+      text: 'News item placeholder.',
     },
     {
-      date: '2025.10',
-      text: 'Presented "Region-Guided Interactive Docent" at IEEE ISMAR 2025.',
+      date: 'YYYY.MM',
+      text: 'News item placeholder.',
     },
     {
-      date: '2025.08',
-      text: 'Visuo-tactile feedback work accepted to IEEE TVCG.',
+      date: 'YYYY.MM',
+      text: 'News item placeholder.',
     },
   ],
 };

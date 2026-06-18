@@ -7,7 +7,7 @@
       <div class="list-item" *ngFor="let p of publications" style="cursor: default;">
         <div class="item-meta">{{ p.year }} · {{ p.venue }}</div>
         <div class="item-title">{{ p.title }}</div>
-        <div class="item-summary">{{ p.authors }}</div>
+        <div class="item-summary" [innerHTML]="p.authors"></div>
         <div class="linkrow" *ngIf="p.links?.length">
           <a *ngFor="let l of p.links" [href]="l.url" target="_blank" rel="noopener">{{ l.label }}</a>
         </div>
