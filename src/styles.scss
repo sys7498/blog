@@ -138,6 +138,11 @@ a:hover {
   margin-top: 6px;
   line-height: 1.65;
 }
+.entry-org strong,
+.item-summary strong {
+  font-weight: 800;
+  color: #111;
+}
 .item-tags {
   font-family: var(--mono);
   font-size: 12px;

@@ -37,7 +37,9 @@ function formatAuthors(raw: string): string {
       }
       return name.trim();
     })
-    .map((name) => (name === 'Yoonseok Shin' ? '<strong>Yoonseok Shin</strong>' : name))
+    .map((name) =>
+      /^(Yoonseok|Y\.)\s+Shin$/.test(name) ? `<strong>${name}</strong>` : name
+    )
     .join(', ');
 }
 

@@ -98,16 +98,16 @@ export const PROFILE: Profile = {
   interests: ['Cooking', 'Coffee', 'Hands-on making'],
   news: [
     {
-      date: 'YYYY.MM',
-      text: 'News item placeholder.',
+      date: '2026.03',
+      text: 'Presented a poster on real-time superquadric representation for AR at IEEE VR 2026.',
     },
     {
-      date: 'YYYY.MM',
-      text: 'News item placeholder.',
+      date: '2025.12',
+      text: 'Collaborative Scene Mood Authoring was published in the SIGGRAPH Asia 2025 XR proceedings.',
     },
     {
-      date: 'YYYY.MM',
-      text: 'News item placeholder.',
+      date: '2025.10',
+      text: 'Presented Region-Guided Interactive Docent as an ISMAR 2025 poster, and the visuo-tactile feedback work appeared as an IEEE TVCG journal paper.',
     },
   ],
 };
