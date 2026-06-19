@@ -4,6 +4,7 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden; // 문서 스크롤 잠금 — 모든 스크롤은 .page 안에서. 헤더 고정 유지.
+  overflow-x: hidden;
 }
 
 :root {
@@ -46,6 +47,7 @@ a:hover {
 .page {
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: 48px 40px 96px;
   box-sizing: border-box;
@@ -86,35 +88,44 @@ a:hover {
 }
 .page-inner::before {
   content: "";
-  position: absolute;
-  inset: -120px clamp(-160px, -12vw, -88px) -140px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: min(100vw, 1160px);
+  transform: translateX(-50%);
   z-index: 0;
   pointer-events: none;
-  border-radius: 44px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.58) 0%,
-    rgba(255, 255, 255, 0.48) 34%,
-    rgba(255, 255, 255, 0.28) 57%,
-    rgba(255, 255, 255, 0.1) 76%,
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.16) 12%,
+    rgba(255, 255, 255, 0.42) 28%,
+    rgba(255, 255, 255, 0.56) 50%,
+    rgba(255, 255, 255, 0.42) 72%,
+    rgba(255, 255, 255, 0.16) 88%,
     rgba(255, 255, 255, 0) 100%
   );
   backdrop-filter: blur(7px) saturate(0.96);
   -webkit-backdrop-filter: blur(7px) saturate(0.96);
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    #000 0%,
-    rgba(0, 0, 0, 0.88) 42%,
-    rgba(0, 0, 0, 0.48) 66%,
-    rgba(0, 0, 0, 0.16) 84%,
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.22) 12%,
+    rgba(0, 0, 0, 0.72) 28%,
+    #000 50%,
+    rgba(0, 0, 0, 0.72) 72%,
+    rgba(0, 0, 0, 0.22) 88%,
     transparent 100%
   );
-  mask-image: radial-gradient(
-    ellipse at center,
-    #000 0%,
-    rgba(0, 0, 0, 0.88) 42%,
-    rgba(0, 0, 0, 0.48) 66%,
-    rgba(0, 0, 0, 0.16) 84%,
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.22) 12%,
+    rgba(0, 0, 0, 0.72) 28%,
+    #000 50%,
+    rgba(0, 0, 0, 0.72) 72%,
+    rgba(0, 0, 0, 0.22) 88%,
     transparent 100%
   );
 }
