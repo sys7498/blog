@@ -52,7 +52,6 @@ a:hover {
   }
   .page-inner {
     padding: 24px 18px 38px;
-    border-radius: 14px;
   }
   .page-title {
     font-size: 27px;
@@ -66,18 +65,43 @@ a:hover {
 }
 
 .page-inner {
+  position: relative;
+  isolation: isolate;
   max-width: 860px;
   margin: 0 auto;
   padding: 34px clamp(20px, 4vw, 48px) 52px;
-  border: 1px solid rgba(230, 230, 230, 0.82);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(22px) saturate(0.82);
-  -webkit-backdrop-filter: blur(22px) saturate(0.82);
-  box-shadow: 0 30px 90px -60px rgba(0, 0, 0, 0.38);
+  background: transparent;
   // 배경 도형과 글이 겹쳐도 읽히도록 은은한 흰색 후광 (흰 배경에선 안 보임)
-  text-shadow: 0 0 7px rgba(255, 255, 255, 0.95),
-    0 0 16px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.86),
+    0 0 12px rgba(255, 255, 255, 0.55);
+}
+.page-inner::before {
+  content: "";
+  position: absolute;
+  inset: -24px clamp(-34px, -3vw, -18px) -30px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.36) 15%,
+      rgba(255, 255, 255, 0.55) 46%,
+      rgba(255, 255, 255, 0.46) 74%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 16%,
+      rgba(255, 255, 255, 0.52) 84%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  backdrop-filter: blur(7px) saturate(0.96);
+  -webkit-backdrop-filter: blur(7px) saturate(0.96);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 0%, #000 62%, transparent 100%);
 }
 // 자체 배경이 있는 요소엔 후광 불필요
 .page-inner pre,
