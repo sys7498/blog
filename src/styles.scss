@@ -50,6 +50,10 @@ a:hover {
   .page {
     padding: 28px 22px 80px;
   }
+  .page-inner {
+    padding: 24px 18px 38px;
+    border-radius: 14px;
+  }
   .page-title {
     font-size: 27px;
   }
@@ -64,6 +68,13 @@ a:hover {
 .page-inner {
   max-width: 860px;
   margin: 0 auto;
+  padding: 34px clamp(20px, 4vw, 48px) 52px;
+  border: 1px solid rgba(230, 230, 230, 0.82);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px) saturate(0.82);
+  -webkit-backdrop-filter: blur(22px) saturate(0.82);
+  box-shadow: 0 30px 90px -60px rgba(0, 0, 0, 0.38);
   // 배경 도형과 글이 겹쳐도 읽히도록 은은한 흰색 후광 (흰 배경에선 안 보임)
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.95),
     0 0 16px rgba(255, 255, 255, 0.8);

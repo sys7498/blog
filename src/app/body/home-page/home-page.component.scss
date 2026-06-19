@@ -5,6 +5,13 @@
 
 .page-inner {
   max-width: 920px;
+  padding: 34px clamp(20px, 4vw, 48px) 52px;
+  border: 1px solid rgba(230, 230, 230, 0.82);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px) saturate(0.82);
+  -webkit-backdrop-filter: blur(22px) saturate(0.82);
+  box-shadow: 0 30px 90px -60px rgba(0, 0, 0, 0.38);
 }
 
 .section {
@@ -255,6 +262,10 @@
 }
 
 @media (max-width: 720px) {
+  .page-inner {
+    padding: 24px 18px 38px;
+    border-radius: 14px;
+  }
   .hero {
     flex-direction: column;
     align-items: flex-start;
