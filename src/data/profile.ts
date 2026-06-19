@@ -43,7 +43,7 @@ export const PROFILE: Profile = {
   entityLinks: [
     { label: 'Graduate School of Culture Technology', url: 'https://ct.kaist.ac.kr/' },
     { label: 'Culture Technology', url: 'https://ct.kaist.ac.kr/' },
-    { label: 'Woontack Woo', url: 'https://pure.kaist.ac.kr/en/persons/woontack-woo/' },
+    { label: 'Woontack Woo', url: 'https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en' },
     { label: 'UVR Lab', url: 'https://uvrlab.org/' },
     { label: 'KAIST', url: 'https://www.kaist.ac.kr/en/' },
   ],

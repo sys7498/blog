@@ -239,9 +239,9 @@
 /* 썸네일 있는 행 (publications / projects) */
 .media-row {
   display: grid;
-  grid-template-columns: 132px 1fr;
-  gap: 22px;
-  padding: 18px 0;
+  grid-template-columns: minmax(240px, 280px) 1fr;
+  gap: 28px;
+  padding: 26px 0;
   border-bottom: 1px solid #f4f4f4;
   align-items: start;
 }
@@ -253,8 +253,8 @@
   transform: translateX(8px);
 }
 .thumb {
-  width: 132px;
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
@@ -267,6 +267,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transform: scale(1.08);
 }
 .thumb-ico {
   font-size: 30px;
@@ -305,10 +306,11 @@
     gap: 13px;
   }
   .media-row {
-    grid-template-columns: 96px 1fr;
-    gap: 14px;
+    grid-template-columns: 136px 1fr;
+    gap: 16px;
   }
   .thumb {
-    width: 96px;
+    width: 136px;
+    aspect-ratio: 4 / 3;
   }
 }

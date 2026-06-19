@@ -51,10 +51,12 @@
       <div class="entry" *ngFor="let p of publications">
         <div class="entry-period">{{ p.year }}</div>
         <div class="entry-main">
-          <div class="entry-title">{{ p.title }}</div>
-          <div class="award-badge" *ngIf="p.award">
-            <span class="award-icon" aria-hidden="true">🏆</span>
-            <span>{{ p.award }}</span>
+          <div class="entry-title">
+            {{ p.title }}
+            <span class="award-badge award-inline" *ngIf="p.award">
+              <span class="award-icon" aria-hidden="true">🏆</span>
+              <span>{{ p.award }}</span>
+            </span>
           </div>
           <div class="entry-org" [innerHTML]="p.authors"></div>
           <div class="entry-venue">{{ p.venue }}</div>
