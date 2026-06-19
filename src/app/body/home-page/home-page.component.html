@@ -9,7 +9,7 @@
         </div>
         <div class="hero-text">
           <h1 class="hero-name">{{ profile.name }}</h1>
-          <div class="hero-role">{{ profile.role }} — <span [innerHTML]="linkify(profile.affiliation)"></span></div>
+          <div class="hero-role">{{ profile.role }} — {{ profile.affiliation }}</div>
           <p class="hero-statement">{{ profile.tagline }}</p>
           <div class="prose hero-bio">
             <p *ngFor="let para of profile.bio" [innerHTML]="linkify(para)"></p>
@@ -66,8 +66,8 @@
       <div class="entry" *ngFor="let e of profile.education">
         <div class="entry-period">{{ e.period }}</div>
         <div class="entry-main">
-          <div class="entry-title" [innerHTML]="linkify(e.org)"></div>
-          <div class="entry-org"><span [innerHTML]="linkify(e.title)"></span><span *ngIf="e.location"> · {{ e.location }}</span></div>
+          <div class="entry-title">{{ e.org }}</div>
+          <div class="entry-org">{{ e.title }}<span *ngIf="e.location"> · {{ e.location }}</span></div>
           <div class="entry-detail" *ngIf="e.detail">{{ e.detail }}</div>
         </div>
       </div>
@@ -94,14 +94,14 @@
             <span *ngIf="!p.thumbnail" class="thumb-ico">📄</span>
           </div>
           <div class="media-main">
-            <div class="media-year">{{ p.year }}</div>
-            <div class="entry-title">
-              {{ p.title }}
-              <span class="award-badge award-inline" *ngIf="p.award">
+            <div class="media-year">
+              <span>{{ p.year }}</span>
+              <span class="award-badge award-meta" *ngIf="p.award">
                 <span class="award-icon" aria-hidden="true">🏆</span>
                 <span>{{ p.award }}</span>
               </span>
             </div>
+            <div class="entry-title">{{ p.title }}</div>
             <div class="entry-org" [innerHTML]="p.authors"></div>
             <div class="entry-venue">{{ p.venue }}</div>
             <div class="linkrow" *ngIf="p.links?.length">
@@ -119,14 +119,14 @@
             <span *ngIf="!p.thumbnail" class="thumb-ico">🪧</span>
           </div>
           <div class="media-main">
-            <div class="media-year">{{ p.year }}</div>
-            <div class="entry-title">
-              {{ p.title }}
-              <span class="award-badge award-inline" *ngIf="p.award">
+            <div class="media-year">
+              <span>{{ p.year }}</span>
+              <span class="award-badge award-meta" *ngIf="p.award">
                 <span class="award-icon" aria-hidden="true">🏆</span>
                 <span>{{ p.award }}</span>
               </span>
             </div>
+            <div class="entry-title">{{ p.title }}</div>
             <div class="entry-org" [innerHTML]="p.authors"></div>
             <div class="entry-venue">{{ p.venue }}</div>
             <div class="linkrow" *ngIf="p.links?.length">

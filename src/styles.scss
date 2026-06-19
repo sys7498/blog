@@ -162,6 +162,10 @@ a:hover {
   color: #000;
 }
 .item-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 0;
   font-family: var(--mono);
   font-size: 12.5px;
   color: #999;
@@ -188,7 +192,6 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 8px;
   padding: 3px 8px;
   border-radius: 999px;
   border: 1px solid rgba(188, 137, 32, 0.28);
@@ -201,8 +204,8 @@ a:hover {
   vertical-align: 0.12em;
   white-space: nowrap;
 }
-.award-inline {
-  margin: 0 0 0 8px;
+.award-meta {
+  margin-left: 8px;
 }
 .award-icon {
   font-family: system-ui, sans-serif;

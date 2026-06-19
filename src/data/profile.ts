@@ -48,7 +48,6 @@ export const PROFILE: Profile = {
     { label: 'KAIST', url: 'https://www.kaist.ac.kr/en/' },
   ],
   links: [
-    { label: 'Email', url: 'mailto:uvrlab@gmail.com' },
     { label: 'GitHub', url: 'https://github.com/sys7498/' },
     {
       label: 'Google Scholar',
