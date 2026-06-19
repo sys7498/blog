@@ -117,6 +117,7 @@ export function parseBibtex(src: string): Publication[] {
       cat.includes('demo') || cat.includes('poster') ? 'demo-poster' : 'paper';
 
     const thumbnail = clean(f['thumbnail'] || f['image'] || '') || undefined;
+    const award = clean(f['award'] || '') || undefined;
 
     pubs.push({
       title: clean(f['title'] || 'Untitled'),
@@ -125,6 +126,7 @@ export function parseBibtex(src: string): Publication[] {
       year: parseInt(clean(f['year'] || '0'), 10) || 0,
       category,
       thumbnail,
+      award,
       links: links.length ? links : undefined,
     });
   }

@@ -154,6 +154,27 @@ a:hover {
   font-weight: 800;
   color: #111;
 }
+.award-badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(188, 137, 32, 0.28);
+  background: rgba(255, 247, 224, 0.74);
+  color: #7a4d00;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.award-icon {
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1;
+}
 .item-tags {
   font-family: var(--mono);
   font-size: 12px;

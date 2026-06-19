@@ -113,6 +113,7 @@ function parseBibtex(src) {
       year: Number.parseInt(clean(fields.year || '0'), 10) || 0,
       category: cat.includes('demo') || cat.includes('poster') ? 'Demos & Posters' : 'Papers',
       doi: clean(fields.doi || ''),
+      award: clean(fields.award || ''),
     });
   }
   return pubs.sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
@@ -176,6 +177,7 @@ for (const pub of publications) {
   doc.font('Helvetica').fontSize(9).fillColor('#777').text(String(pub.year), 54, top, { width: 82 });
   doc.font('Helvetica-Bold').fontSize(10).fillColor('#111').text(pub.title, 145, top, { width: 395 });
   doc.font('Helvetica').fontSize(9).fillColor('#777').text(`${pub.category} | ${pub.venue}`, 145, doc.y + 2, { width: 395 });
+  if (pub.award) doc.font('Helvetica-Bold').fontSize(9).fillColor('#7a4d00').text(`Award: ${pub.award}`, 145, doc.y + 2, { width: 395 });
   addAuthors(doc, pub.authors);
   if (pub.doi) doc.font('Helvetica').fontSize(8.7).fillColor('#666').text(`DOI: ${pub.doi}`, 145, doc.y + 1, { width: 395 });
   doc.moveDown(0.55);

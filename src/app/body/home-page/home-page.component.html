@@ -96,6 +96,10 @@
           <div class="media-main">
             <div class="media-year">{{ p.year }}</div>
             <div class="entry-title">{{ p.title }}</div>
+            <div class="award-badge" *ngIf="p.award">
+              <span class="award-icon" aria-hidden="true">🏆</span>
+              <span>{{ p.award }}</span>
+            </div>
             <div class="entry-org" [innerHTML]="p.authors"></div>
             <div class="entry-venue">{{ p.venue }}</div>
             <div class="linkrow" *ngIf="p.links?.length">
@@ -115,6 +119,10 @@
           <div class="media-main">
             <div class="media-year">{{ p.year }}</div>
             <div class="entry-title">{{ p.title }}</div>
+            <div class="award-badge" *ngIf="p.award">
+              <span class="award-icon" aria-hidden="true">🏆</span>
+              <span>{{ p.award }}</span>
+            </div>
             <div class="entry-org" [innerHTML]="p.authors"></div>
             <div class="entry-venue">{{ p.venue }}</div>
             <div class="linkrow" *ngIf="p.links?.length">

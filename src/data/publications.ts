@@ -15,6 +15,7 @@ export interface Publication {
   year: number;
   category: PubCategory; // 'paper' | 'demo-poster' (.bib 의 category 필드로 지정)
   thumbnail?: string; // 썸네일 이미지 (.bib 의 image/thumbnail 필드). 없으면 플레이스홀더
+  award?: string; // 수상 내역 (.bib 의 award 필드)
   links?: { label: string; url: string }[];
 }
 
