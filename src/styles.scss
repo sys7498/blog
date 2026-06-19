@@ -36,6 +36,11 @@ a {
 a:hover {
   opacity: 0.6; // 굵기 대신 — 레이아웃 시프트 없음
 }
+.text-link {
+  color: #111;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.28);
+  padding-bottom: 1px;
+}
 
 /* ---- 콘텐츠 페이지 공통 (about / publication / project / post) ---- */
 .page {

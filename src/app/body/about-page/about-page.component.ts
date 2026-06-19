@@ -75,7 +75,50 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     this.tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
   }
 
+  public linkify(text: string): string {
+    return linkifyProfileText(text);
+  }
+
   public openCv() {
     window.open(this.cvPdf, '_blank');
   }
+}
+
+function linkifyProfileText(text: string): string {
+  let html = escapeHtml(text);
+  const links = [...PROFILE.entityLinks].sort((a, b) => b.label.length - a.label.length);
+  const replacements: string[] = [];
+  for (const link of links) {
+    html = html.replace(
+      new RegExp(`\\b${escapeRegExp(link.label)}\\b`, 'g'),
+      () => {
+        const token = `@@PROFILE_LINK_${replacements.length}@@`;
+        replacements.push(
+          `<a class="text-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">${link.label}</a>`
+        );
+        return token;
+      }
+    );
+  }
+  replacements.forEach((replacement, index) => {
+    html = html.replace(`@@PROFILE_LINK_${index}@@`, replacement);
+  });
+  return html;
+}
+
+function escapeHtml(text: string): string {
+  return text.replace(/[&<>"']/g, (ch) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return entities[ch];
+  });
+}
+
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

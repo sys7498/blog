@@ -9,10 +9,10 @@
         </div>
         <div class="hero-text">
           <h1 class="hero-name">{{ profile.name }}</h1>
-          <div class="hero-role">{{ profile.role }} — {{ profile.affiliation }}</div>
+          <div class="hero-role">{{ profile.role }} — <span [innerHTML]="linkify(profile.affiliation)"></span></div>
           <p class="hero-statement">{{ profile.tagline }}</p>
           <div class="prose hero-bio">
-            <p *ngFor="let para of profile.bio">{{ para }}</p>
+            <p *ngFor="let para of profile.bio" [innerHTML]="linkify(para)"></p>
           </div>
           <div class="hero-meta">
             <span class="meta-item">
@@ -66,8 +66,8 @@
       <div class="entry" *ngFor="let e of profile.education">
         <div class="entry-period">{{ e.period }}</div>
         <div class="entry-main">
-          <div class="entry-title">{{ e.org }}</div>
-          <div class="entry-org">{{ e.title }}<span *ngIf="e.location"> · {{ e.location }}</span></div>
+          <div class="entry-title" [innerHTML]="linkify(e.org)"></div>
+          <div class="entry-org"><span [innerHTML]="linkify(e.title)"></span><span *ngIf="e.location"> · {{ e.location }}</span></div>
           <div class="entry-detail" *ngIf="e.detail">{{ e.detail }}</div>
         </div>
       </div>

@@ -18,6 +18,7 @@ export interface Profile {
   photo: string; // 얼굴 사진 경로 (예: 'assets/avatar.svg' — 실제 사진으로 교체)
   tagline: string; // 랜딩/히어로용 한 줄 연구 소개
   bio: string[]; // 문단 배열
+  entityLinks: { label: string; url: string }[]; // 본문에서 자동 링크 처리할 기관/사람
   links: { label: string; url: string }[];
   education: CvEntry[];
   experience: CvEntry[];
@@ -36,8 +37,15 @@ export const PROFILE: Profile = {
   tagline:
     'I research how machines perceive and understand the world inside virtual reality.',
   bio: [
-    "I'm pursuing a master's degree at KAIST's Graduate School of Culture Technology, where my research focuses on computer vision within virtual reality environments at the UVR Lab.",
+    "I'm pursuing a master's degree at KAIST's Graduate School of Culture Technology in the UVR Lab, advised by Prof. Woontack Woo. My research focuses on computer vision within virtual reality environments.",
     'I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I cook, make coffee, and enjoy making things with my hands.',
+  ],
+  entityLinks: [
+    { label: 'Graduate School of Culture Technology', url: 'https://ct.kaist.ac.kr/' },
+    { label: 'Culture Technology', url: 'https://ct.kaist.ac.kr/' },
+    { label: 'Woontack Woo', url: 'https://pure.kaist.ac.kr/en/persons/woontack-woo/' },
+    { label: 'UVR Lab', url: 'https://uvrlab.org/' },
+    { label: 'KAIST', url: 'https://www.kaist.ac.kr/en/' },
   ],
   links: [
     { label: 'Email', url: 'mailto:uvrlab@gmail.com' },
