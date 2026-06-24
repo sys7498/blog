@@ -26,7 +26,7 @@
     </nav>
 
     <!-- 우측: Download CV -->
-    <a class="cv-btn" [href]="cvPdf" download="Yoonseok_Shin_CV.pdf">
+    <button class="cv-btn" type="button" (click)="openCv()">
         <svg class="cv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -34,7 +34,7 @@
             <path d="M12 15V3" />
         </svg>
         Download CV
-    </a>
+    </button>
 
     <!-- 좁은 화면: 햄버거 -->
     <button class="hamburger" [class.open]="openMenu" (click)="toggleMenu('about', $event)" aria-label="menu">
@@ -47,6 +47,6 @@
             (click)="go(s.id)">{{ s.label }}</a>
         <div class="mm-label">Blog</div>
         <a class="menu-row" (click)="goPosts()">Posts</a>
-        <a class="menu-row" [href]="cvPdf" download="Yoonseok_Shin_CV.pdf">Download CV</a>
+        <a class="menu-row" (click)="openCv()">Download CV</a>
     </div>
 </div>

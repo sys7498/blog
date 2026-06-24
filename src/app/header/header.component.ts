@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NavService } from '../services/nav.service';
+import { CvService } from '../services/cv.service';
 
 interface SubItem {
   id: string;
@@ -34,12 +35,12 @@ export class HeaderComponent implements OnInit {
 
   public recentPosts: PostMeta[] = [];
   public openMenu: '' | 'about' | 'posts' = ''; // 모바일 토글
-  public readonly cvPdf = 'assets/Yoonseok_Shin_CV.pdf';
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    public navState: NavService
+    public navState: NavService,
+    private cv: CvService
   ) {}
 
   ngOnInit() {
@@ -76,9 +77,9 @@ export class HeaderComponent implements OnInit {
     this.openMenu = '';
     this.router.navigate(['/post', slug]);
   }
-  public openCv() {
+  public async openCv() {
     this.openMenu = '';
-    window.open(this.cvPdf, '_blank');
+    await this.cv.download();
   }
 
   public toggleMenu(which: 'about' | 'posts', event: MouseEvent) {

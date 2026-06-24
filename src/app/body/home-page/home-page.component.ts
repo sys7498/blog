@@ -14,6 +14,7 @@ import { PUBLICATIONS, Publication } from '../../../data/publications';
 import { parseBibtex } from '../../../data/bibtex';
 import { PROJECTS, Project } from '../../../data/projects';
 import { NavService } from '../../services/nav.service';
+import { CvService } from '../../services/cv.service';
 
 @Component({
   selector: 'app-home-page',
@@ -28,7 +29,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly projects: Project[] = PROJECTS;
 
   public tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
-  public readonly cvPdf = 'assets/Yoonseok_Shin_CV.pdf';
 
   @ViewChild('scroller') scroller!: ElementRef<HTMLElement>;
 
@@ -37,7 +37,8 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     private host: ElementRef<HTMLElement>,
     private route: ActivatedRoute,
     private router: Router,
-    public nav: NavService
+    public nav: NavService,
+    private cv: CvService
   ) {}
 
   get papers(): Publication[] {
@@ -136,8 +137,8 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     return `linear-gradient(135deg, hsl(${a} 64% 60%), hsl(${b} 64% 46%))`;
   }
 
-  public openCv() {
-    window.open(this.cvPdf, '_blank');
+  public async openCv() {
+    await this.cv.download();
   }
   public openProject(slug: string) {
     this.router.navigate(['/project', slug]);

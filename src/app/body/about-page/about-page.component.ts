@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { PROFILE } from '../../../data/profile';
 import { PUBLICATIONS, Publication } from '../../../data/publications';
 import { parseBibtex } from '../../../data/bibtex';
+import { CvService } from '../../services/cv.service';
 
 @Component({
   selector: 'app-about-page',
@@ -25,12 +26,13 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
 
   public tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
 
-  // 컴파일된 LaTeX CV PDF 경로 (cv/cv.tex → 컴파일 후 여기에 저장)
-  public readonly cvPdf = 'assets/Yoonseok_Shin_CV.pdf';
-
   @ViewChild('scroller') scroller!: ElementRef<HTMLElement>;
 
-  constructor(private http: HttpClient, private host: ElementRef<HTMLElement>) {}
+  constructor(
+    private http: HttpClient,
+    private host: ElementRef<HTMLElement>,
+    private cv: CvService
+  ) {}
 
   ngOnInit() {
     this.http
@@ -79,8 +81,8 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     return linkifyProfileText(text);
   }
 
-  public openCv() {
-    window.open(this.cvPdf, '_blank');
+  public async openCv() {
+    await this.cv.download();
   }
 }
 
