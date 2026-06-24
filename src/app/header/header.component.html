@@ -1,27 +1,18 @@
 <div class="header-container">
     <div class="header-title" (click)="goHome()">Y o o n</div>
 
-    <!-- 넓은 화면: About / Posts + hover 드롭다운 -->
+    <!-- 넓은 화면: Profile / Posts -->
     <nav class="nav-wide">
         <div class="nav-item" [class.open]="openMenu === 'about'">
-            <button class="nav-link" [class.active]="aboutActive" (click)="goHome()">About</button>
+            <button class="nav-link" [class.active]="aboutActive" (click)="goHome()">Profile</button>
             <div class="nav-menu">
                 <a *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
                     (click)="go(s.id)">{{ s.label }}</a>
             </div>
         </div>
 
-        <div class="nav-item" [class.open]="openMenu === 'posts'">
+        <div class="nav-item nav-item-plain">
             <button class="nav-link" [class.active]="postsActive" (click)="goPosts()">Posts</button>
-            <div class="nav-menu posts-menu">
-                <div class="pm-head">Recent</div>
-                <a *ngFor="let p of recentPosts" class="menu-row post-row" (click)="openPost(p.slug)">
-                    <span class="pm-date">{{ p.date }}</span>
-                    <span class="pm-title">{{ p.title }}</span>
-                </a>
-                <p class="pm-empty" *ngIf="!recentPosts.length">No posts yet.</p>
-                <a class="menu-row pm-all" (click)="goPosts()">Enter blog →</a>
-            </div>
         </div>
     </nav>
 
@@ -42,7 +33,7 @@
     </button>
 
     <div class="mobile-menu" *ngIf="openMenu" (click)="$event.stopPropagation()">
-        <div class="mm-label">About</div>
+        <div class="mm-label">Profile</div>
         <a *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
             (click)="go(s.id)">{{ s.label }}</a>
         <div class="mm-label">Blog</div>

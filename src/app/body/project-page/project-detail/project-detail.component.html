@@ -1,6 +1,6 @@
 <div class="page">
   <div class="page-inner">
-    <a class="back-link" routerLink="/" [fragment]="'project'">← projects</a>
+    <a class="back-link" (click)="backToProjects()">← projects</a>
 
     <ng-container *ngIf="project; else notfound">
       <div class="item-meta">{{ project.year }}</div>

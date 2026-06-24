@@ -32,4 +32,13 @@ export class NavService {
     this.active.set(id);
     return true;
   }
+
+  public scrollTop(): void {
+    if (this.container) {
+      this.container.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    this.active.set('about');
+  }
 }

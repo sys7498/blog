@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PROJECTS, Project } from '../../../../data/projects';
+import { NavService } from '../../../services/nav.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -17,7 +18,9 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private nav: NavService
   ) {}
 
   ngOnInit() {
@@ -28,5 +31,11 @@ export class ProjectDetailComponent implements OnInit {
         this.project.embedUrl
       );
     }
+  }
+
+  public backToProjects() {
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => this.nav.scrollTo('project'), 0);
+    });
   }
 }

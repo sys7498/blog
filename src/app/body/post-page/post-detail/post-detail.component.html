@@ -1,6 +1,6 @@
 <div class="page">
   <div class="page-inner">
-    <a class="back-link" routerLink="/" [fragment]="'post'">← posts</a>
+    <a class="back-link" routerLink="/posts">← posts</a>
 
     <ng-container *ngIf="!error; else missing">
       <div class="item-meta" *ngIf="date">{{ date }}</div>

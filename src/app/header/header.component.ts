@@ -26,7 +26,7 @@ interface PostMeta {
 export class HeaderComponent implements OnInit {
   // About 드롭다운: 홈 한 페이지의 섹션들로 스크롤
   public readonly aboutSub: SubItem[] = [
-    { id: 'about', label: 'About' },
+    { id: 'about', label: 'Profile' },
     { id: 'education', label: 'Education' },
     { id: 'news', label: 'News' },
     { id: 'publication', label: 'Publications' },
@@ -60,14 +60,29 @@ export class HeaderComponent implements OnInit {
     return this.aboutActive && this.navState.active() === id;
   }
 
-  /** 섹션으로 이동 (주소 fragment 갱신 → 뒤로가기/공유 가능) */
   public go(id: string) {
     this.openMenu = '';
-    this.router.navigate(['/'], { fragment: id });
+    if (id === 'about') {
+      this.goHome();
+      return;
+    }
+    if (this.router.url.split('?')[0] === '/') {
+      this.navState.scrollTo(id);
+      return;
+    }
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => this.navState.scrollTo(id), 0);
+    });
   }
   public goHome() {
     this.openMenu = '';
-    this.router.navigate(['/']);
+    if (this.router.url.split('?')[0] === '/') {
+      this.navState.scrollTop();
+      return;
+    }
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => this.navState.scrollTop(), 0);
+    });
   }
   public goPosts() {
     this.openMenu = '';
