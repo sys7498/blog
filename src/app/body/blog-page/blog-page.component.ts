@@ -33,6 +33,10 @@ export class BlogPageComponent implements OnInit {
     this.router.navigate(['/post', slug]);
   }
 
+  public openEditor() {
+    this.router.navigate(['/editor']);
+  }
+
   // 카드 커버에 글마다 다른 그라데이션
   public cover(i: number): string {
     const a = (i * 47) % 360;

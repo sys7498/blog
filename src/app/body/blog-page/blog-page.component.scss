@@ -4,6 +4,10 @@
 }
 
 .blog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
   margin-bottom: 40px;
 }
 .eyebrow {
@@ -25,6 +29,18 @@
   color: #777;
   margin: 0;
   max-width: 52ch;
+}
+
+.editor-btn {
+  flex: 0 0 auto;
+  border: 1px solid #111;
+  border-radius: 7px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
 }
 
 .grid {
@@ -90,6 +106,14 @@
 }
 
 @media (max-width: 680px) {
+  .blog-head {
+    display: grid;
+  }
+
+  .editor-btn {
+    justify-self: start;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 20px;
