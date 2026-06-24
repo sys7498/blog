@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
   }
   public goHome() {
     this.openMenu = '';
-    this.router.navigate(['/'], { fragment: 'about' });
+    this.router.navigate(['/']);
   }
   public goPosts() {
     this.openMenu = '';

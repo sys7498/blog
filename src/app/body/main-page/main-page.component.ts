@@ -17,7 +17,7 @@ export class MainPageComponent {
 
   public readonly profile = PROFILE;
   public readonly explore = [
-    { path: '/about', label: 'about' },
+    { path: '/', label: 'about' },
     { path: '/publication', label: 'publications' },
     { path: '/project', label: 'projects' },
     { path: '/post', label: 'posts' },
