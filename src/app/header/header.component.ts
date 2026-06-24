@@ -24,7 +24,7 @@ interface PostMeta {
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  // About 드롭다운: 홈 한 페이지의 섹션들로 스크롤
+  // Overview 드롭다운: 홈 한 페이지의 섹션들로 스크롤
   public readonly aboutSub: SubItem[] = [
     { id: 'about', label: 'Profile' },
     { id: 'education', label: 'Education' },
