@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import type { jsPDF as JsPDF } from 'jspdf';
 import { PROFILE } from '../../data/profile';
-import { PROJECTS } from '../../data/projects';
 import { PUBLICATIONS, Publication } from '../../data/publications';
 import { parseBibtex } from '../../data/bibtex';
 
@@ -28,14 +27,6 @@ export class CvService {
         item.org,
         item.location || '',
         item.detail || '',
-      ]);
-    }
-
-    layout.section('Projects');
-    for (const project of PROJECTS.filter((p) => p.slug !== 'embed-example')) {
-      layout.entry(project.title, String(project.year), [
-        project.summary,
-        project.tags.join(', '),
       ]);
     }
 
@@ -73,7 +64,7 @@ export class CvService {
 }
 
 class CvLayout {
-  private readonly margin = 42;
+  private readonly margin = 46;
   private readonly pageWidth = 595.28;
   private readonly pageHeight = 841.89;
   private readonly contentWidth = this.pageWidth - this.margin * 2;
@@ -82,68 +73,64 @@ class CvLayout {
   constructor(private doc: JsPDF) {}
 
   public header(): void {
-    const links = [
-      'github.com/sys7498',
-      'linkedin.com/in/yoonseok-shin-562055310',
-      'scholar.google.com/citations?user=g8hg2zwAAAAJ',
-      PROFILE.email,
-    ];
+    const links = [PROFILE.email, 'GitHub', 'Google Scholar', 'LinkedIn'];
 
-    this.doc.setFont('helvetica', 'bold');
-    this.doc.setFontSize(25);
+    this.doc.setFont('times', 'normal');
+    this.doc.setFontSize(28);
+    this.doc.setTextColor(17, 17, 17);
     this.doc.text(PROFILE.name, this.pageWidth / 2, this.y, { align: 'center' });
-    this.y += 20;
+    this.y += 18;
 
-    this.doc.setFont('helvetica', 'normal');
-    this.doc.setFontSize(9.5);
-    this.doc.setTextColor(35, 35, 35);
+    this.doc.setFont('times', 'normal');
+    this.doc.setFontSize(10);
+    this.doc.setTextColor(42, 42, 42);
     this.centerWrapped(links.join(' | '));
-    this.y += 10;
+    this.y += 6;
   }
 
   public section(title: string): void {
     this.ensureSpace(44);
-    this.y += 8;
-    this.doc.setTextColor(17, 17, 17);
-    this.doc.setFont('helvetica', 'bold');
-    this.doc.setFontSize(14);
-    this.doc.text(title, this.margin, this.y);
     this.y += 7;
+    this.doc.setTextColor(17, 17, 17);
+    this.doc.setFont('times', 'normal');
+    this.doc.setFontSize(15);
+    this.doc.text(title, this.margin, this.y);
+    this.y += 6;
     this.doc.setDrawColor(35, 35, 35);
-    this.doc.setLineWidth(0.5);
+    this.doc.setLineWidth(0.45);
     this.doc.line(this.margin, this.y, this.pageWidth - this.margin, this.y);
-    this.y += 13;
+    this.y += 11;
   }
 
   public paragraph(text: string): void {
     const lines = this.doc.splitTextToSize(text, this.contentWidth);
-    this.ensureSpace(lines.length * 13 + 6);
+    this.ensureSpace(lines.length * 12 + 5);
     this.doc.setTextColor(45, 45, 45);
-    this.doc.setFont('helvetica', 'normal');
+    this.doc.setFont('times', 'normal');
     this.doc.setFontSize(10);
     this.doc.text(lines, this.margin, this.y);
-    this.y += lines.length * 13 + 5;
+    this.y += lines.length * 12 + 4;
   }
 
   public entry(title: string, right: string, lines: string[]): void {
     this.ensureSpace(44);
     const titleWidth = this.contentWidth - 110;
     this.doc.setTextColor(17, 17, 17);
-    this.doc.setFont('helvetica', 'bold');
-    this.doc.setFontSize(10.5);
+    this.doc.setFont('times', 'bold');
+    this.doc.setFontSize(10.7);
     const titleLines = this.doc.splitTextToSize(title, titleWidth);
     this.doc.text(titleLines, this.margin, this.y);
-    this.doc.setFont('helvetica', 'normal');
-    this.doc.setFontSize(9.5);
+    this.doc.setFont('times', 'normal');
+    this.doc.setFontSize(9.7);
     this.doc.setTextColor(95, 95, 95);
     this.doc.text(right, this.pageWidth - this.margin, this.y, { align: 'right' });
-    this.y += titleLines.length * 12 + 3;
+    this.y += titleLines.length * 11.5 + 3;
 
     for (const line of lines.filter(Boolean)) {
       const wrapped = this.doc.splitTextToSize(line, this.contentWidth);
       this.ensureSpace(wrapped.length * 12 + 2);
-      this.doc.setFont('helvetica', 'normal');
-      this.doc.setFontSize(9.5);
+      this.doc.setFont('times', 'normal');
+      this.doc.setFontSize(9.8);
       this.doc.setTextColor(55, 55, 55);
       this.doc.text(wrapped, this.margin, this.y);
       this.y += wrapped.length * 12 + 2;
@@ -155,23 +142,23 @@ class CvLayout {
     const category = pub.category === 'demo-poster' ? 'Demos & Posters' : 'Papers';
     const meta = [String(pub.year), category, pub.venue].filter(Boolean).join(' | ');
     this.ensureSpace(58);
-    this.doc.setFont('helvetica', 'bold');
-    this.doc.setFontSize(10);
+    this.doc.setFont('times', 'bold');
+    this.doc.setFontSize(10.2);
     this.doc.setTextColor(17, 17, 17);
     const titleLines = this.doc.splitTextToSize(pub.title, this.contentWidth);
     this.doc.text(titleLines, this.margin, this.y);
     this.y += titleLines.length * 12 + 2;
 
     if (pub.award) {
-      this.doc.setFont('helvetica', 'bold');
-      this.doc.setFontSize(9);
+      this.doc.setFont('times', 'bold');
+      this.doc.setFontSize(9.4);
       this.doc.setTextColor(122, 77, 0);
       this.doc.text(`Award: ${pub.award}`, this.margin, this.y);
       this.y += 11;
     }
 
-    this.doc.setFont('helvetica', 'normal');
-    this.doc.setFontSize(9);
+    this.doc.setFont('times', 'italic');
+    this.doc.setFontSize(9.2);
     this.doc.setTextColor(95, 95, 95);
     this.doc.text(meta, this.margin, this.y);
     this.y += 11;
@@ -181,7 +168,8 @@ class CvLayout {
     const doi = pub.links?.find((link) => link.label === 'DOI')?.url;
     if (doi) {
       this.doc.setTextColor(95, 95, 95);
-      this.doc.setFontSize(8.5);
+      this.doc.setFont('times', 'normal');
+      this.doc.setFontSize(8.8);
       this.doc.text(doi, this.margin, this.y);
       this.y += 10;
     }
@@ -192,9 +180,9 @@ class CvLayout {
     this.ensureSpace(22);
     this.doc.setFontSize(10);
     this.doc.setTextColor(17, 17, 17);
-    this.doc.setFont('helvetica', 'bold');
+    this.doc.setFont('times', 'bold');
     this.doc.text(group, this.margin, this.y);
-    this.doc.setFont('helvetica', 'normal');
+    this.doc.setFont('times', 'normal');
     this.doc.setTextColor(45, 45, 45);
     const lines = this.doc.splitTextToSize(items, this.contentWidth - 110);
     this.doc.text(lines, this.margin + 110, this.y);
@@ -202,7 +190,7 @@ class CvLayout {
   }
 
   public footer(): void {
-    this.doc.setFont('helvetica', 'normal');
+    this.doc.setFont('times', 'normal');
     this.doc.setFontSize(8);
     this.doc.setTextColor(130, 130, 130);
     this.doc.text(
@@ -221,7 +209,7 @@ class CvLayout {
     this.doc.setFontSize(9);
 
     for (const part of parts) {
-      this.doc.setFont('helvetica', part === 'Yoonseok Shin' || part === 'Y. Shin' ? 'bold' : 'normal');
+      this.doc.setFont('times', part === 'Yoonseok Shin' || part === 'Y. Shin' ? 'bold' : 'normal');
       this.doc.setTextColor(55, 55, 55);
       const chunks = part.split(/(\s+)/);
       for (const chunk of chunks) {
