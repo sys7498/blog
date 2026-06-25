@@ -53,15 +53,9 @@
         <input [(ngModel)]="summary" />
       </label>
 
-      <div class="editor-grid">
-        <label class="body-field">
-          Markdown
-          <textarea #markdownInput></textarea>
-        </label>
-        <section class="preview-pane">
-          <div class="preview-label">Preview</div>
-          <div class="prose" [innerHTML]="previewHtml"></div>
-        </section>
+      <div class="editor-surface">
+        <div class="surface-label">Content</div>
+        <div #markdownInput></div>
       </div>
 
       <div class="editor-actions bottom-actions">

@@ -55,67 +55,54 @@ input[readonly] {
   margin-bottom: 18px;
 }
 
-.editor-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
-  align-items: stretch;
+.editor-surface {
+  margin-top: 18px;
 }
 
-.body-field textarea {
-  min-height: 520px;
-  resize: vertical;
-  font-family: var(--mono);
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-:host ::ng-deep .EasyMDEContainer {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-:host ::ng-deep .EasyMDEContainer .CodeMirror {
-  min-height: 500px;
-  border-color: rgba(17, 17, 17, 0.16);
-  border-radius: 0 0 7px 7px;
-  font-family: var(--mono);
-  font-size: 14px;
-  line-height: 1.65;
-  background: rgba(255, 255, 255, 0.76);
-}
-
-:host ::ng-deep .editor-toolbar {
-  border-color: rgba(17, 17, 17, 0.16);
-  border-radius: 7px 7px 0 0;
-  background: rgba(255, 255, 255, 0.84);
-}
-
-:host ::ng-deep .editor-toolbar button {
-  color: #111 !important;
-}
-
-:host ::ng-deep .editor-toolbar button:hover,
-:host ::ng-deep .editor-toolbar button.active {
-  background: rgba(17, 17, 17, 0.08);
-  border-color: rgba(17, 17, 17, 0.08);
-}
-
-.preview-pane {
-  min-height: 520px;
-  box-sizing: border-box;
-  border: 1px solid rgba(17, 17, 17, 0.12);
-  border-radius: 7px;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.58);
-  overflow: auto;
-}
-
-.preview-label {
+.surface-label {
   margin-bottom: 16px;
   font-family: var(--mono);
   font-size: 12px;
   color: #999;
   text-transform: uppercase;
+}
+
+:host ::ng-deep .toastui-editor-defaultUI {
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+:host ::ng-deep .toastui-editor-defaultUI-toolbar {
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+:host ::ng-deep .toastui-editor-defaultUI-toolbar button {
+  border-radius: 5px;
+}
+
+:host ::ng-deep .toastui-editor-main {
+  background: rgba(255, 255, 255, 0.76);
+}
+
+:host ::ng-deep .toastui-editor-ww-container,
+:host ::ng-deep .toastui-editor-md-container {
+  background: transparent;
+}
+
+:host ::ng-deep .toastui-editor-contents {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.72;
+  color: #111;
+}
+
+:host ::ng-deep .toastui-editor-contents p,
+:host ::ng-deep .toastui-editor-contents li {
+  color: #222;
 }
 
 .editor-actions {

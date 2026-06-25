@@ -22,7 +22,7 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
-    "easymde": "^2.21.0",
+    "@toast-ui/editor": "^3.2.2",
     "jspdf": "^4.2.1",
     "marked": "^18.0.5",
     "pdfkit": "^0.19.1",

@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { marked } from 'marked';
 import { firstValueFrom } from 'rxjs';
 import { LocalPostsService } from '../../services/local-posts.service';
 
@@ -22,7 +21,7 @@ import { LocalPostsService } from '../../services/local-posts.service';
   styleUrl: './post-editor.component.scss',
 })
 export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('markdownInput') markdownInput!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('markdownInput') markdownInput!: ElementRef<HTMLElement>;
 
   public mode: 'write' | 'edit' = 'write';
   public originalSlug = '';
@@ -32,12 +31,11 @@ export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public summary = '';
   public slug = '';
   public body = '';
-  public previewHtml = '';
   public savedAt = '';
   public loading = true;
   public error = false;
 
-  private editor?: EasyMDEInstance;
+  private editor?: ToastEditorInstance;
   private viewReady = false;
 
   constructor(
@@ -61,49 +59,34 @@ export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
       this.loading = false;
     }
     this.calendarDate = dateToInputValue(this.date);
-    await this.updatePreview();
     this.syncEditorBody();
   }
 
   async ngAfterViewInit() {
     this.viewReady = true;
-    const { default: EasyMDE } = await import('easymde');
-    this.editor = new EasyMDE({
-      element: this.markdownInput.nativeElement,
-      autofocus: true,
-      spellChecker: false,
-      status: ['lines', 'words'],
-      minHeight: '500px',
-      toolbar: [
-        'bold',
-        'italic',
-        'heading',
-        '|',
-        'quote',
-        'unordered-list',
-        'ordered-list',
-        'code',
-        '|',
-        'link',
-        'image',
-        'table',
-        '|',
-        'preview',
-        'side-by-side',
-        'fullscreen',
-        '|',
-        'guide',
-      ],
+    const { Editor } = await import('@toast-ui/editor');
+    this.editor = new Editor({
+      el: this.markdownInput.nativeElement,
+      height: '560px',
       initialValue: this.body,
-    }) as EasyMDEInstance;
-    this.editor.codemirror.on('change', () => {
-      this.body = this.editor?.value() || '';
-      this.updatePreview();
+      initialEditType: 'wysiwyg',
+      previewStyle: 'vertical',
+      usageStatistics: false,
+      toolbarItems: [
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr', 'quote'],
+        ['ul', 'ol', 'task'],
+        ['table', 'link'],
+        ['code', 'codeblock'],
+      ],
+    }) as ToastEditorInstance;
+    this.editor.on('change', () => {
+      this.body = this.editor?.getMarkdown() || '';
     });
   }
 
   ngOnDestroy() {
-    this.editor?.cleanup();
+    this.editor?.destroy();
   }
 
   public syncSlugFromTitle() {
@@ -111,16 +94,12 @@ export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.slug = slugify(this.title);
   }
 
-  public async updatePreview() {
-    this.previewHtml = await marked.parse(this.body || '');
-  }
-
   public syncDateFromCalendar() {
     this.date = inputDateToDisplay(this.calendarDate);
   }
 
   public async save() {
-    this.body = this.editor?.value() || this.body;
+    this.body = this.editor?.getMarkdown() || this.body;
     const slug = slugify(this.slug || this.title);
     const saved = this.localPosts.save({
       slug,
@@ -134,7 +113,7 @@ export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public downloadMarkdown() {
-    this.body = this.editor?.value() || this.body;
+    this.body = this.editor?.getMarkdown() || this.body;
     const content = composeMarkdown({
       title: this.title,
       date: this.date,
@@ -183,17 +162,15 @@ export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private syncEditorBody() {
     if (!this.viewReady || !this.editor) return;
-    this.editor.value(this.body);
+    this.editor.setMarkdown(this.body);
   }
 }
 
-interface EasyMDEInstance {
-  value(): string;
-  value(text: string): void;
-  cleanup(): void;
-  codemirror: {
-    on(event: string, handler: () => void): void;
-  };
+interface ToastEditorInstance {
+  getMarkdown(): string;
+  setMarkdown(markdown: string): void;
+  on(event: 'change', handler: () => void): void;
+  destroy(): void;
 }
 
 function splitFrontmatter(text: string): {
