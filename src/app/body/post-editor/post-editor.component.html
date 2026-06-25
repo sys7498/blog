@@ -1,0 +1,85 @@
+<div class="page">
+  <div class="page-inner editor-page">
+    <div class="editor-head">
+      <div>
+        <a class="back-link" routerLink="/posts">← posts</a>
+        <div class="eyebrow">{{ mode }}</div>
+        <h1 class="page-title">{{ mode === 'write' ? 'Write Post' : 'Edit Post' }}</h1>
+      </div>
+      <div class="editor-actions top-actions">
+        <button class="ghost-btn" type="button" (click)="downloadMarkdown()" [disabled]="loading || error">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          <span>Download</span>
+        </button>
+        <button class="primary-btn" type="button" (click)="save()" [disabled]="loading || error">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
+            <path d="M17 21v-8H7v8" />
+            <path d="M7 3v5h8" />
+          </svg>
+          <span>Save</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="page-sub editor-note">
+      Saved posts are stored in this browser and shown immediately on the site. Download the Markdown file when you want to commit it to the repo.
+    </p>
+
+    <p class="muted" *ngIf="loading">Loading...</p>
+
+    <ng-container *ngIf="!loading && !error; else missing">
+      <div class="meta-grid">
+        <label>
+          Title
+          <input [(ngModel)]="title" (ngModelChange)="syncSlugFromTitle()" />
+        </label>
+        <label>
+          Date
+          <input [(ngModel)]="date" />
+        </label>
+        <label>
+          Slug
+          <input [(ngModel)]="slug" [readonly]="mode === 'edit'" />
+        </label>
+      </div>
+
+      <label class="summary-field">
+        Summary
+        <input [(ngModel)]="summary" />
+      </label>
+
+      <div class="editor-grid">
+        <label class="body-field">
+          Markdown
+          <textarea [(ngModel)]="body" (ngModelChange)="updatePreview()" spellcheck="false"></textarea>
+        </label>
+        <section class="preview-pane">
+          <div class="preview-label">Preview</div>
+          <div class="prose" [innerHTML]="previewHtml"></div>
+        </section>
+      </div>
+
+      <div class="editor-actions bottom-actions">
+        <button class="primary-btn" type="button" (click)="save()">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
+            <path d="M17 21v-8H7v8" />
+            <path d="M7 3v5h8" />
+          </svg>
+          <span>Save</span>
+        </button>
+        <span class="save-state" *ngIf="savedAt">Saved {{ savedAt }}</span>
+      </div>
+    </ng-container>
+
+    <ng-template #missing>
+      <h2 class="page-title">Not found</h2>
+      <p class="page-sub">This post could not be loaded.</p>
+    </ng-template>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { BlogPageComponent } from './body/blog-page/blog-page.component';
 import { MainPageComponent } from './body/main-page/main-page.component';
 import { ProjectDetailComponent } from './body/project-page/project-detail/project-detail.component';
 import { PostDetailComponent } from './body/post-page/post-detail/post-detail.component';
+import { PostEditorComponent } from './body/post-editor/post-editor.component';
 import { PublicationPageComponent } from './body/publication-page/publication-page.component';
 import { VrPageComponent } from './body/vr-page/vr-page.component';
 
@@ -12,6 +13,8 @@ export const routes: Routes = [
   { path: '', component: HomePageComponent },
   // 블로그
   { path: 'posts', component: BlogPageComponent },
+  { path: 'posts/write', component: PostEditorComponent },
+  { path: 'post/:slug/edit', component: PostEditorComponent },
   { path: 'post/:slug', component: PostDetailComponent },
   // 프로젝트 데모 / VR
   { path: 'publication', component: PublicationPageComponent },

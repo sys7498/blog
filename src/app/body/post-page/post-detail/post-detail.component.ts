@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { marked } from 'marked';
+import { LocalPostsService } from '../../../services/local-posts.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -19,7 +20,12 @@ export class PostDetailComponent implements OnInit {
   public error = false;
   public slug = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient,
+    private localPosts: LocalPostsService
+  ) {}
 
   ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug');
@@ -28,6 +34,17 @@ export class PostDetailComponent implements OnInit {
       return;
     }
     this.slug = slug;
+
+    const local = this.localPosts.get(slug);
+    if (local) {
+      this.title = local.title;
+      this.date = local.date;
+      Promise.resolve(marked.parse(local.body)).then((html) => {
+        this.html = html;
+        this.loading = false;
+      });
+      return;
+    }
 
     this.http
       .get(`assets/posts/${slug}.md`, { responseType: 'text' })
@@ -45,7 +62,7 @@ export class PostDetailComponent implements OnInit {
 
   public editPost() {
     if (!this.slug) return;
-    window.location.href = `/admin/#/collections/posts/entries/${this.slug}`;
+    this.router.navigate(['/post', this.slug, 'edit']);
   }
 
   /** 프론트매터(--- ... ---)를 분리해 메타와 본문을 반환 */

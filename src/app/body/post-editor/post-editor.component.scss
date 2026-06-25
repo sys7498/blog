@@ -1,0 +1,153 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.editor-page {
+  max-width: 1180px;
+}
+
+.editor-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.editor-note {
+  max-width: 72ch;
+  margin-bottom: 28px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  font-size: 12px;
+  color: #777;
+}
+
+input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  border-radius: 7px;
+  padding: 10px 11px;
+  font: inherit;
+  color: #111;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+input[readonly] {
+  color: #777;
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.summary-field {
+  margin-bottom: 18px;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.body-field textarea {
+  min-height: 520px;
+  resize: vertical;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.preview-pane {
+  min-height: 520px;
+  box-sizing: border-box;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 7px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.58);
+  overflow: auto;
+}
+
+.preview-label {
+  margin-bottom: 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bottom-actions {
+  margin-top: 18px;
+}
+
+.primary-btn,
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 7px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.primary-btn {
+  border: 1px solid #111;
+  color: #fff;
+  background: #111;
+}
+
+.ghost-btn {
+  border: 1px solid rgba(17, 17, 17, 0.22);
+  color: #111;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.primary-btn svg,
+.ghost-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.save-state {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #999;
+}
+
+@media (max-width: 860px) {
+  .editor-head,
+  .editor-grid,
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .top-actions {
+    justify-content: start;
+  }
+}
