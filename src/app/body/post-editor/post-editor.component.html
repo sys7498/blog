@@ -30,9 +30,9 @@
       Saved posts are stored in this browser and shown immediately on the site. Download the Markdown file when you want to commit it to the repo.
     </p>
 
-    <p class="muted" *ngIf="loading">Loading...</p>
+    <ng-container *ngIf="!error; else missing">
+      <p class="muted" *ngIf="loading">Loading...</p>
 
-    <ng-container *ngIf="!loading && !error; else missing">
       <div class="meta-grid">
         <label>
           Title
@@ -40,7 +40,7 @@
         </label>
         <label>
           Date
-          <input [(ngModel)]="date" />
+          <input type="date" [(ngModel)]="calendarDate" (ngModelChange)="syncDateFromCalendar()" />
         </label>
         <label>
           Slug
@@ -56,7 +56,7 @@
       <div class="editor-grid">
         <label class="body-field">
           Markdown
-          <textarea [(ngModel)]="body" (ngModelChange)="updatePreview()" spellcheck="false"></textarea>
+          <textarea #markdownInput></textarea>
         </label>
         <section class="preview-pane">
           <div class="preview-label">Preview</div>

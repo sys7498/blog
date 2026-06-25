@@ -70,6 +70,36 @@ input[readonly] {
   line-height: 1.65;
 }
 
+:host ::ng-deep .EasyMDEContainer {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+:host ::ng-deep .EasyMDEContainer .CodeMirror {
+  min-height: 500px;
+  border-color: rgba(17, 17, 17, 0.16);
+  border-radius: 0 0 7px 7px;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.65;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+:host ::ng-deep .editor-toolbar {
+  border-color: rgba(17, 17, 17, 0.16);
+  border-radius: 7px 7px 0 0;
+  background: rgba(255, 255, 255, 0.84);
+}
+
+:host ::ng-deep .editor-toolbar button {
+  color: #111 !important;
+}
+
+:host ::ng-deep .editor-toolbar button:hover,
+:host ::ng-deep .editor-toolbar button.active {
+  background: rgba(17, 17, 17, 0.08);
+  border-color: rgba(17, 17, 17, 0.08);
+}
+
 .preview-pane {
   min-height: 520px;
   box-sizing: border-box;

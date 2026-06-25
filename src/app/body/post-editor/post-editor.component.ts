@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { marked } from 'marked';
@@ -14,11 +21,14 @@ import { LocalPostsService } from '../../services/local-posts.service';
   templateUrl: './post-editor.component.html',
   styleUrl: './post-editor.component.scss',
 })
-export class PostEditorComponent implements OnInit {
+export class PostEditorComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('markdownInput') markdownInput!: ElementRef<HTMLTextAreaElement>;
+
   public mode: 'write' | 'edit' = 'write';
   public originalSlug = '';
   public title = '';
   public date = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+  public calendarDate = new Date().toISOString().slice(0, 10);
   public summary = '';
   public slug = '';
   public body = '';
@@ -26,6 +36,9 @@ export class PostEditorComponent implements OnInit {
   public savedAt = '';
   public loading = true;
   public error = false;
+
+  private editor?: EasyMDEInstance;
+  private viewReady = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +60,50 @@ export class PostEditorComponent implements OnInit {
       this.body = '# Untitled Post\n\nWrite here.';
       this.loading = false;
     }
+    this.calendarDate = dateToInputValue(this.date);
     await this.updatePreview();
+    this.syncEditorBody();
+  }
+
+  async ngAfterViewInit() {
+    this.viewReady = true;
+    const { default: EasyMDE } = await import('easymde');
+    this.editor = new EasyMDE({
+      element: this.markdownInput.nativeElement,
+      autofocus: true,
+      spellChecker: false,
+      status: ['lines', 'words'],
+      minHeight: '500px',
+      toolbar: [
+        'bold',
+        'italic',
+        'heading',
+        '|',
+        'quote',
+        'unordered-list',
+        'ordered-list',
+        'code',
+        '|',
+        'link',
+        'image',
+        'table',
+        '|',
+        'preview',
+        'side-by-side',
+        'fullscreen',
+        '|',
+        'guide',
+      ],
+      initialValue: this.body,
+    }) as EasyMDEInstance;
+    this.editor.codemirror.on('change', () => {
+      this.body = this.editor?.value() || '';
+      this.updatePreview();
+    });
+  }
+
+  ngOnDestroy() {
+    this.editor?.cleanup();
   }
 
   public syncSlugFromTitle() {
@@ -59,7 +115,12 @@ export class PostEditorComponent implements OnInit {
     this.previewHtml = await marked.parse(this.body || '');
   }
 
+  public syncDateFromCalendar() {
+    this.date = inputDateToDisplay(this.calendarDate);
+  }
+
   public async save() {
+    this.body = this.editor?.value() || this.body;
     const slug = slugify(this.slug || this.title);
     const saved = this.localPosts.save({
       slug,
@@ -73,6 +134,7 @@ export class PostEditorComponent implements OnInit {
   }
 
   public downloadMarkdown() {
+    this.body = this.editor?.value() || this.body;
     const content = composeMarkdown({
       title: this.title,
       date: this.date,
@@ -93,6 +155,7 @@ export class PostEditorComponent implements OnInit {
     if (local) {
       this.title = local.title;
       this.date = local.date;
+      this.calendarDate = dateToInputValue(local.date);
       this.summary = local.summary || '';
       this.slug = local.slug;
       this.body = local.body;
@@ -107,6 +170,7 @@ export class PostEditorComponent implements OnInit {
       const { meta, body } = splitFrontmatter(raw);
       this.title = meta['title'] || slug;
       this.date = meta['date'] || this.date;
+      this.calendarDate = dateToInputValue(this.date);
       this.summary = meta['summary'] || '';
       this.slug = slug;
       this.body = body.trimStart();
@@ -116,6 +180,20 @@ export class PostEditorComponent implements OnInit {
       this.loading = false;
     }
   }
+
+  private syncEditorBody() {
+    if (!this.viewReady || !this.editor) return;
+    this.editor.value(this.body);
+  }
+}
+
+interface EasyMDEInstance {
+  value(): string;
+  value(text: string): void;
+  cleanup(): void;
+  codemirror: {
+    on(event: string, handler: () => void): void;
+  };
 }
 
 function splitFrontmatter(text: string): {
@@ -157,4 +235,17 @@ function slugify(value: string): string {
 
 function escapeMeta(value: string): string {
   return value.replace(/\r?\n/g, ' ').trim();
+}
+
+function dateToInputValue(value: string): string {
+  const normalized = value.trim().replace(/\./g, '-');
+  return /^\d{4}-\d{2}-\d{2}$/.test(normalized)
+    ? normalized
+    : new Date().toISOString().slice(0, 10);
+}
+
+function inputDateToDisplay(value: string): string {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value)
+    ? value.replace(/-/g, '.')
+    : new Date().toISOString().slice(0, 10).replace(/-/g, '.');
 }
