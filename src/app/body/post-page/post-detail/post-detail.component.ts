@@ -17,6 +17,7 @@ export class PostDetailComponent implements OnInit {
   public html = '';
   public loading = true;
   public error = false;
+  public slug = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -26,6 +27,7 @@ export class PostDetailComponent implements OnInit {
       this.fail();
       return;
     }
+    this.slug = slug;
 
     this.http
       .get(`assets/posts/${slug}.md`, { responseType: 'text' })
@@ -39,6 +41,11 @@ export class PostDetailComponent implements OnInit {
         },
         error: () => this.fail(),
       });
+  }
+
+  public editPost() {
+    if (!this.slug) return;
+    window.location.href = `/admin/#/collections/posts/entries/${this.slug}`;
   }
 
   /** 프론트매터(--- ... ---)를 분리해 메타와 본문을 반환 */

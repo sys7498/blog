@@ -6,7 +6,12 @@
         <h1 class="blog-title">Posts</h1>
         <p class="blog-sub">A lab notebook — informal notes, write-ups, and the occasional coffee tangent.</p>
       </div>
-      <button class="editor-btn" type="button" (click)="openEditor()">Write / Edit</button>
+      <button class="editor-btn" type="button" (click)="openWriter()" aria-label="Write a new post">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        <span>Write</span>
+      </button>
     </div>
 
     <div class="grid">

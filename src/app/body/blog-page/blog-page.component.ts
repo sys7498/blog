@@ -33,8 +33,8 @@ export class BlogPageComponent implements OnInit {
     this.router.navigate(['/post', slug]);
   }
 
-  public openEditor() {
-    this.router.navigate(['/editor']);
+  public openWriter() {
+    window.location.href = '/admin/#/collections/posts/new';
   }
 
   // 카드 커버에 글마다 다른 그라데이션

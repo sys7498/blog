@@ -1,6 +1,15 @@
 <div class="page">
   <div class="page-inner">
-    <a class="back-link" routerLink="/posts">← posts</a>
+    <div class="post-actions">
+      <a class="back-link" routerLink="/posts">← posts</a>
+      <button class="edit-link" type="button" (click)="editPost()" *ngIf="!error && slug" aria-label="Edit this post">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+        <span>Edit</span>
+      </button>
+    </div>
 
     <ng-container *ngIf="!error; else missing">
       <div class="item-meta" *ngIf="date">{{ date }}</div>
