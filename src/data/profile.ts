@@ -41,9 +41,15 @@ export const PROFILE: Profile = {
     'I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I cook, make coffee, and enjoy making things with my hands.',
   ],
   entityLinks: [
-    { label: 'Graduate School of Culture Technology', url: 'https://ct.kaist.ac.kr/' },
+    {
+      label: 'Graduate School of Culture Technology',
+      url: 'https://ct.kaist.ac.kr/',
+    },
     { label: 'Culture Technology', url: 'https://ct.kaist.ac.kr/' },
-    { label: 'Woontack Woo', url: 'https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en' },
+    {
+      label: 'Woontack Woo',
+      url: 'https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en',
+    },
     { label: 'UVR Lab', url: 'https://uvrlab.org/' },
     { label: 'KAIST', url: 'https://www.kaist.ac.kr/en/' },
   ],
@@ -60,7 +66,13 @@ export const PROFILE: Profile = {
   ],
   education: [
     {
-      period: '2024 – Present',
+      period: '2026 – Present',
+      title: 'Ph.D. Student in Culture Technology',
+      org: 'KAIST, Graduate School of Culture Technology',
+      location: 'Daejeon, Korea',
+    },
+    {
+      period: '2024 – 2026',
       title: 'M.S. in Culture Technology',
       org: 'KAIST, Graduate School of Culture Technology',
       location: 'Daejeon, Korea',
@@ -74,7 +86,7 @@ export const PROFILE: Profile = {
   ],
   experience: [
     {
-      period: '2023 – Present',
+      period: '2024 – Present',
       title: 'Graduate Researcher',
       org: 'UVR Lab, KAIST',
       location: 'Daejeon, Korea',
