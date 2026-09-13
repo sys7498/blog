@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
     { id: 'education', label: 'Education' },
     { id: 'news', label: 'News' },
     { id: 'publication', label: 'Publications' },
-    { id: 'project', label: 'Projects' },
   ];
 
   public recentPosts: PostMeta[] = [];

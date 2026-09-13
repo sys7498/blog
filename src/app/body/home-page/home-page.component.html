@@ -161,22 +161,7 @@
       </div>
     </section>
 
-    <!-- ===== Projects ===== -->
-    <section id="project" class="section reveal">
-      <h2 class="section-title">Projects</h2>
-      <div class="media-row clickable" *ngFor="let p of projects; let i = index" (click)="openProject(p.slug)">
-        <div class="thumb" [style.background]="p.thumbnail ? null : cover(i + 3)">
-          <img *ngIf="p.thumbnail" [src]="p.thumbnail" [alt]="p.title" />
-          <span *ngIf="!p.thumbnail" class="thumb-ico">🧪</span>
-        </div>
-        <div class="media-main">
-          <div class="media-year">{{ p.year }}</div>
-          <div class="entry-title">{{ p.title }} <span class="go">→</span></div>
-          <div class="entry-detail">{{ p.summary }}</div>
-          <div class="entry-tags">{{ p.tags.join(' · ') }}</div>
-        </div>
-      </div>
-    </section>
+
 
   </div>
 </div>

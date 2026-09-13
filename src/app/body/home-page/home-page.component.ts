@@ -7,12 +7,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { PROFILE } from '../../../data/profile';
 import { PUBLICATIONS, Publication } from '../../../data/publications';
 import { parseBibtex } from '../../../data/bibtex';
-import { PROJECTS, Project } from '../../../data/projects';
 import { NavService } from '../../services/nav.service';
 import { CvService } from '../../services/cv.service';
 
@@ -26,7 +25,6 @@ import { CvService } from '../../services/cv.service';
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly profile = PROFILE;
   public publications: Publication[] = [...PUBLICATIONS];
-  public readonly projects: Project[] = PROJECTS;
 
   public tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
 
@@ -36,7 +34,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     private http: HttpClient,
     private host: ElementRef<HTMLElement>,
     private route: ActivatedRoute,
-    private router: Router,
     public nav: NavService,
     private cv: CvService
   ) {}
@@ -143,9 +140,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public async openCv() {
     await this.cv.download();
-  }
-  public openProject(slug: string) {
-    this.router.navigate(['/project', slug]);
   }
 }
 
