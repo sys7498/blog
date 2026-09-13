@@ -42,3 +42,7 @@ testem.log
 Thumbs.db
 /src/assets/posts/index.json
 /src/assets/Yoonseok_Shin_CV.pdf
+
+# Python publication sync
+__pycache__/
+*.pyc

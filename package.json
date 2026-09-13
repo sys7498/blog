@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "sync:publications": "python3 scripts/sync-publications.py",
     "generate:posts": "node scripts/generate-posts.mjs",
     "generate:cv": "node scripts/generate-cv.mjs",
     "generate": "npm run generate:posts && npm run generate:cv",

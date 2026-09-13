@@ -111,7 +111,7 @@ function parseBibtex(src) {
       authors: formatAuthors(clean(fields.author || '')),
       venue: clean(fields.journal || fields.booktitle || fields.note || 'Preprint'),
       year: Number.parseInt(clean(fields.year || '0'), 10) || 0,
-      category: cat.includes('demo') || cat.includes('poster') ? 'Demos & Posters' : 'Papers',
+      category: cat === 'unclassified' ? 'Other Publications' : cat.includes('demo') || cat.includes('poster') ? 'Demos & Posters' : 'Papers',
       doi: clean(fields.doi || ''),
       award: clean(fields.award || ''),
     });

@@ -6,7 +6,7 @@
 //
 // 같은 해 안에서는 BibTeX 항목이 먼저, 그다음 manual 항목 순으로 표시됩니다.
 
-export type PubCategory = 'paper' | 'demo-poster';
+export type PubCategory = 'paper' | 'demo-poster' | 'unclassified';
 
 export interface Publication {
   title: string;

@@ -42,10 +42,14 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   get papers(): Publication[] {
-    return this.publications.filter((p) => p.category !== 'demo-poster');
+    return this.publications.filter((p) => p.category === 'paper');
   }
   get demosPosters(): Publication[] {
     return this.publications.filter((p) => p.category === 'demo-poster');
+  }
+
+  get otherPublications(): Publication[] {
+    return this.publications.filter((p) => p.category === 'unclassified');
   }
 
   ngOnInit() {

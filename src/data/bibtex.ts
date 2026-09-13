@@ -1,7 +1,7 @@
 // 의존성 없는 경량 BibTeX 파서. src/assets/publications.bib 를 Publication[] 으로 변환합니다.
 // 표준 @article / @inproceedings / @misc 등 일반적인 엔트리를 처리합니다.
 
-import { Publication } from './publications';
+import { Publication, PubCategory } from './publications';
 
 /** "{...}" 형태의 중괄호 균형을 맞춰 안쪽 내용을 읽음 (중첩 중괄호 보존) */
 function readBraced(src: string, start: number): [string, number] {
@@ -113,7 +113,8 @@ export function parseBibtex(src: string): Publication[] {
 
     // category 필드로 분류 ('demo'/'poster' 포함 시 demo-poster, 기본 paper)
     const cat = clean(f['category'] || '').toLowerCase();
-    const category: 'paper' | 'demo-poster' =
+    const category: PubCategory =
+      cat === 'unclassified' ? 'unclassified' :
       cat.includes('demo') || cat.includes('poster') ? 'demo-poster' : 'paper';
 
     const thumbnail = clean(f['thumbnail'] || f['image'] || '') || undefined;

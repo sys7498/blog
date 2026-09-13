@@ -29,7 +29,7 @@ export interface Profile {
 
 export const PROFILE: Profile = {
   name: 'Yoonseok Shin',
-  role: 'M.S. Student',
+  role: 'Ph.D. Student',
   affiliation: 'KAIST',
   email: 'sys7498@kaist.ac.kr',
   location: 'Daejeon, Republic of Korea',
@@ -37,7 +37,7 @@ export const PROFILE: Profile = {
   tagline:
     'I research how machines perceive and understand the world inside virtual reality.',
   bio: [
-    "I'm pursuing a master's degree at KAIST's Graduate School of Culture Technology in the UVR Lab, advised by Prof. Woontack Woo. My research focuses on computer vision within virtual reality environments.",
+    "I'm pursuing a Ph.D. at KAIST's Graduate School of Culture Technology in the UVR Lab, advised by Prof. Woontack Woo. My research focuses on computer vision within virtual reality environments.",
     'I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I cook, make coffee, and enjoy making things with my hands.',
   ],
   entityLinks: [
@@ -57,7 +57,7 @@ export const PROFILE: Profile = {
     { label: 'GitHub', url: 'https://github.com/sys7498/' },
     {
       label: 'Google Scholar',
-      url: 'https://scholar.google.com/citations?user=g8hg2zwAAAAJ&hl=en/',
+      url: 'https://scholar.google.com/citations?user=g8hg2zwAAAAJ&hl=en',
     },
     {
       label: 'LinkedIn',

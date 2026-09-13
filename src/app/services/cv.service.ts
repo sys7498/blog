@@ -139,7 +139,7 @@ class CvLayout {
   }
 
   public publication(pub: Publication): void {
-    const category = pub.category === 'demo-poster' ? 'Demos & Posters' : 'Papers';
+    const category = pub.category === 'unclassified' ? 'Other Publications' : pub.category === 'demo-poster' ? 'Demos & Posters' : 'Papers';
     const meta = [String(pub.year), category, pub.venue].filter(Boolean).join(' | ');
     this.ensureSpace(58);
     this.doc.setFont('times', 'bold');
