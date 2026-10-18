@@ -160,6 +160,69 @@
 .hero-bio p {
   margin: 0 0 10px;
 }
+.cook-hover {
+  position: relative;
+  display: inline-flex;
+  z-index: 3;
+}
+.cook-link {
+  color: #191919;
+  font-weight: 750;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: #f06d3b;
+  transition: color 0.14s ease, text-decoration-color 0.14s ease;
+}
+.cook-link:hover,
+.cook-link:focus-visible {
+  color: #d95324;
+  text-decoration-color: currentColor;
+  opacity: 1;
+}
+.cook-preview {
+  position: absolute;
+  z-index: 8;
+  top: calc(100% + 12px);
+  left: -9px;
+  width: 205px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: grid;
+  border: 1px solid rgba(24, 24, 24, 0.2);
+  border-radius: 11px;
+  background: #f5f1ed;
+  box-shadow: 0 18px 35px -18px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-7px) scale(0.96);
+  transform-origin: 16% 0;
+  transition: opacity 0.16s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cook-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  grid-area: 1 / 1;
+}
+.cook-preview span {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: stretch;
+  padding: 17px 9px 7px;
+  font-family: var(--mono);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.62));
+}
+.cook-hover:hover .cook-preview,
+.cook-hover:focus-within .cook-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
 .hero-meta {
   display: flex;
   flex-wrap: wrap;

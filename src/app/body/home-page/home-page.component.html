@@ -12,7 +12,18 @@
           <div class="hero-role">{{ profile.role }} — {{ profile.affiliation }}</div>
           <p class="hero-statement">{{ profile.tagline }}</p>
           <div class="prose hero-bio">
-            <p *ngFor="let para of profile.bio" [innerHTML]="linkify(para)"></p>
+            <p [innerHTML]="linkify(profile.bio[0])"></p>
+            <p>
+              I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I
+              <span class="cook-hover" (mouseenter)="startCookPreview()" (mouseleave)="stopCookPreview()">
+                <a class="cook-link" href="https://www.instagram.com/ssssyyyyssss_cook/" target="_blank" rel="noopener"
+                  aria-label="Visit @ssssyyyyssss_cook on Instagram" (focus)="startCookPreview()" (blur)="stopCookPreview()">cook</a>
+                <span class="cook-preview" aria-hidden="true">
+                  <img [src]="cookPhotos[cookPhotoIndex]" alt="" />
+                  <span>@ssssyyyyssss_cook</span>
+                </span>
+              </span>, make coffee, and enjoy making things with my hands.
+            </p>
           </div>
           <div class="hero-meta">
             <span class="meta-item">

@@ -24,9 +24,15 @@ import { CvService } from '../../services/cv.service';
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly profile = PROFILE;
+  public readonly cookPhotos = Array.from(
+    { length: 12 },
+    (_, index) => `assets/cook/cook-${String(index + 1).padStart(2, '0')}.jpg`
+  );
   public publications: Publication[] = [...PUBLICATIONS];
+  public cookPhotoIndex = 0;
 
   public tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
+  private cookPreviewTimer: ReturnType<typeof setInterval> | null = null;
 
   @ViewChild('scroller') scroller!: ElementRef<HTMLElement>;
 
@@ -63,6 +69,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.stopCookPreview();
     this.nav.register(null);
   }
 
@@ -115,6 +122,20 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   public resetTilt() {
     this.tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
+  }
+
+  public startCookPreview() {
+    if (this.cookPreviewTimer) return;
+    this.cookPhotoIndex = Math.floor(Math.random() * this.cookPhotos.length);
+    this.cookPreviewTimer = window.setInterval(() => {
+      this.cookPhotoIndex = (this.cookPhotoIndex + 1) % this.cookPhotos.length;
+    }, 150);
+  }
+
+  public stopCookPreview() {
+    if (!this.cookPreviewTimer) return;
+    window.clearInterval(this.cookPreviewTimer);
+    this.cookPreviewTimer = null;
   }
 
   public linkify(text: string): string {
