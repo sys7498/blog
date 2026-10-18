@@ -10,12 +10,14 @@ CDN URLs expire.
 
 ## Current coverage
 
-- Imported on 2026-10-19: all 71 visible posts, one representative image per post
-  (70 photo posts and one espresso reel cover). Carousel secondary slides and
-  full reel video are not imported.
+- Checked on 2026-10-19 after the owner's archive changes: all 64 currently
+  visible photo posts, one representative image per post. Carousel secondary
+  slides are not imported.
 - Newest imported post: `DeZb4lmuOhn` (물냉면).
-- Oldest imported post: `CuPliT0hFMQ` (Detroit Bulgogi Pizza).
-- The initial 12 local files were retained; 59 missing entries were added.
+- Oldest currently visible post: `CulJqBLhV_h`.
+- Seven previously imported posts disappeared from the profile. They are recorded
+  in `docs/cooking-retired.json`, outside the site's public assets and app imports.
+  Their photos were removed from deployed assets; Git history retains recovery.
 - Files remaining in Downloads are not considered imported. Only manifest entries
   with an existing local image count as imported.
 
@@ -25,6 +27,11 @@ CDN URLs expire.
 2. Read the profile's post links and compare each shortcode against that set.
    Skip existing shortcodes whose local images exist. Repair a missing file
    without adding a duplicate entry.
+   Load the complete grid, including reel covers, and verify the collected count
+   matches the profile count before treating any missing entry as unpublished.
+   Move no-longer-visible entries into `docs/cooking-retired.json` and remove
+   their image assets. If a retired ID becomes visible again, restore its record
+   and photo rather than duplicating it. Never infer removals from a partial load.
 3. Download one representative photo for each new post. Name new files with the
    shortcode (for example `DeZb4lmuOhn.jpg`) to make future matching unambiguous.
    Keep existing filenames to preserve the recorded mappings.

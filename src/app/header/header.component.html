@@ -19,14 +19,15 @@
     </button>
 
     <!-- 좁은 화면: 햄버거 -->
-    <button class="hamburger" [class.open]="openMenu" (click)="toggleMenu($event)" aria-label="menu">
+    <button class="hamburger" [class.open]="openMenu" (click)="toggleMenu($event)" aria-label="menu"
+        aria-controls="mobile-navigation" [attr.aria-expanded]="!!openMenu">
         <span></span><span></span><span></span>
     </button>
 
-    <div class="mobile-menu" *ngIf="openMenu" (click)="$event.stopPropagation()">
+    <div id="mobile-navigation" class="mobile-menu" *ngIf="openMenu" (click)="$event.stopPropagation()">
         <div class="mm-label">Overview</div>
-        <a *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
-            (click)="go(s.id)">{{ s.label }}</a>
-        <a class="menu-row" (click)="openCv()">Download CV</a>
+        <button type="button" *ngFor="let s of aboutSub" class="menu-row" [class.active]="isSecActive(s.id)"
+            (click)="go(s.id)">{{ s.label }}</button>
+        <button type="button" class="menu-row" (click)="openCv()">Download CV</button>
     </div>
 </div>

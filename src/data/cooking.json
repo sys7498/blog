@@ -3,7 +3,7 @@
   "account": "ssssyyyyssss_cook",
   "profileUrl": "https://www.instagram.com/ssssyyyyssss_cook/",
   "lastImportedOn": "2026-10-19",
-  "coverage": "All 71 posts visible on 2026-10-19: 70 photo posts and one espresso reel cover, one representative image per post. Deduplicate by shortcode, not by date or filename.",
+  "coverage": "All 64 currently visible photo posts checked on 2026-10-19. Seven formerly imported posts are no longer visible and have been removed from the slideshow and deployed assets.",
   "posts": [
     {
       "shortcode": "DeZb4lmuOhn",
@@ -146,14 +146,6 @@
       "importedOn": "2026-10-19"
     },
     {
-      "shortcode": "DKI3aq2z7b-",
-      "caption": "비빔밥",
-      "permalink": "https://www.instagram.com/p/DKI3aq2z7b-/",
-      "image": "assets/cook/DKI3aq2z7b-.jpg",
-      "sourceMediaFilename": "500996548_17932240953023502_4594978955175385033_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
       "shortcode": "DKI3WT8T2-W",
       "caption": "해물토마토파스타",
       "permalink": "https://www.instagram.com/p/DKI3WT8T2-W/",
@@ -258,14 +250,6 @@
       "importedOn": "2026-10-19"
     },
     {
-      "shortcode": "DGvlO1ATaC2",
-      "caption": "어묵탕",
-      "permalink": "https://www.instagram.com/p/DGvlO1ATaC2/",
-      "image": "assets/cook/DGvlO1ATaC2.jpg",
-      "sourceMediaFilename": "482784525_17923281831023502_5494559282787986041_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
       "shortcode": "DGf7SRlPozL",
       "caption": "김치볶음밥",
       "permalink": "https://www.instagram.com/p/DGf7SRlPozL/",
@@ -327,22 +311,6 @@
       "permalink": "https://www.instagram.com/p/DESnDy0SvtO/",
       "image": "assets/cook/DESnDy0SvtO.jpg",
       "sourceMediaFilename": "661382186_18013807253838791_1017760505980404690_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
-      "shortcode": "DESm92vyxQY",
-      "caption": "목살",
-      "permalink": "https://www.instagram.com/p/DESm92vyxQY/",
-      "image": "assets/cook/DESm92vyxQY.jpg",
-      "sourceMediaFilename": "655444996_18091336703515374_4383556795943585373_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
-      "shortcode": "DESmyXuyOED",
-      "caption": "아메리카노",
-      "permalink": "https://www.instagram.com/p/DESmyXuyOED/",
-      "image": "assets/cook/DESmyXuyOED.jpg",
-      "sourceMediaFilename": "655981768_18069156110269121_6524370146514237784_n.jpg",
       "importedOn": "2026-10-19"
     },
     {
@@ -423,14 +391,6 @@
       "permalink": "https://www.instagram.com/p/DA33HkUz1FI/",
       "image": "assets/cook/DA33HkUz1FI.jpg",
       "sourceMediaFilename": "656278159_18067082111313574_2242191419292457640_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
-      "shortcode": "DAySG2hOKTG",
-      "caption": "에스프레소 샷 내리기",
-      "permalink": "https://www.instagram.com/reel/DAySG2hOKTG/",
-      "image": "assets/cook/DAySG2hOKTG.jpg",
-      "sourceMediaFilename": "501667721_729452859518052_3508163128843467512_n.jpg",
       "importedOn": "2026-10-19"
     },
     {
@@ -544,22 +504,8 @@
       "image": "assets/cook/CulJqBLhV_h.jpg",
       "sourceMediaFilename": "650720300_17988346805786109_1292281416531991982_n.jpg",
       "importedOn": "2026-10-19"
-    },
-    {
-      "shortcode": "CuPnOteB_iX",
-      "caption": "볶음밥 · 짜장 · 군만두",
-      "permalink": "https://www.instagram.com/p/CuPnOteB_iX/",
-      "image": "assets/cook/CuPnOteB_iX.jpg",
-      "sourceMediaFilename": "624539880_18124043134556495_653422961045336897_n.jpg",
-      "importedOn": "2026-10-19"
-    },
-    {
-      "shortcode": "CuPliT0hFMQ",
-      "caption": "Detroit Bulgogi Pizza",
-      "permalink": "https://www.instagram.com/p/CuPliT0hFMQ/",
-      "image": "assets/cook/CuPliT0hFMQ.jpg",
-      "sourceMediaFilename": "657685030_18082614338055757_1098134166079679993_n.jpg",
-      "importedOn": "2026-10-19"
     }
-  ]
+  ],
+  "lastProfileCheckedOn": "2026-10-19",
+  "visibleProfilePostCount": 64
 }
