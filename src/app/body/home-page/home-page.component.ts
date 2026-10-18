@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -29,6 +30,10 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly cookPhotos = cooking.posts.map((post) => post.image);
   public publications: Publication[] = [...PUBLICATIONS];
   public cookPhotoIndex = 0;
+  public cookPreviewOpen = false;
+  public cookPreviewLeft = -9;
+  public cookPreviewAbove = false;
+  private cookImages: HTMLImageElement[] = [];
 
   public tiltStyle = 'perspective(900px) rotateX(0) rotateY(0)';
   private cookPreviewTimer: ReturnType<typeof setInterval> | null = null;
@@ -111,6 +116,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public tilt(event: MouseEvent) {
+    if (window.matchMedia('(hover: none)').matches) return;
     const el = event.currentTarget as HTMLElement;
     const r = el.getBoundingClientRect();
     const px = (event.clientX - r.left) / r.width - 0.5;
@@ -125,17 +131,63 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public startCookPreview() {
     if (this.cookPreviewTimer) return;
-    this.cookPhotoIndex = Math.floor(Math.random() * this.cookPhotos.length);
+    this.cookPreviewOpen = true;
+    const trigger = this.host.nativeElement.querySelector('.cook-hover')!.getBoundingClientRect();
+    this.cookPreviewLeft = Math.max(16 - trigger.left, Math.min(-9, window.innerWidth - trigger.left - 221));
+    this.cookPreviewAbove = trigger.bottom + 240 > window.innerHeight;
+    if (!this.cookImages.length) {
+      this.cookImages = this.cookPhotos.map((src) => {
+        const image = new Image();
+        image.src = src;
+        return image;
+      });
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     this.cookPreviewTimer = window.setInterval(() => {
-      this.cookPhotoIndex = (this.cookPhotoIndex + 1) % this.cookPhotos.length;
+      const next = (this.cookPhotoIndex + 1) % this.cookPhotos.length;
+      if (this.cookImages[next].complete && this.cookImages[next].naturalWidth) this.cookPhotoIndex = next;
     }, 150);
   }
 
   public stopCookPreview() {
+    this.cookPreviewOpen = false;
     if (!this.cookPreviewTimer) return;
     window.clearInterval(this.cookPreviewTimer);
     this.cookPreviewTimer = null;
   }
+
+  public enterCook(event: PointerEvent) {
+    if (event.pointerType === 'mouse' && window.matchMedia('(min-width: 721px) and (hover: hover)').matches) this.startCookPreview();
+  }
+
+  public leaveCook(event: PointerEvent) {
+    if (event.pointerType === 'mouse' && window.matchMedia('(min-width: 721px) and (hover: hover)').matches) this.stopCookPreview();
+  }
+
+  public tapCook(event: MouseEvent) {
+    if (window.matchMedia('(hover: none), (max-width: 720px)').matches) {
+      event.preventDefault();
+      this.cookPreviewOpen ? this.stopCookPreview() : this.startCookPreview();
+    }
+  }
+
+  public focusCook() {
+    if (this.host.nativeElement.querySelector('.cook-link:focus-visible')) this.startCookPreview();
+  }
+
+  public blurCook(event: FocusEvent) {
+    const wrapper = this.host.nativeElement.querySelector('.cook-hover');
+    if (!wrapper?.contains(event.relatedTarget as Node)) this.stopCookPreview();
+  }
+
+  @HostListener('document:pointerdown', ['$event'])
+  public dismissCookOutside(event: PointerEvent) {
+    const wrapper = this.host.nativeElement.querySelector('.cook-hover');
+    if (!wrapper?.contains(event.target as Node)) this.stopCookPreview();
+  }
+
+  @HostListener('document:keydown.escape')
+  public dismissCookWithEscape() { this.stopCookPreview(); }
 
   public linkify(text: string): string {
     return linkifyProfileText(text);

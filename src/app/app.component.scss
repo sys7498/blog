@@ -23,3 +23,10 @@ $header-height: 60px;
     height: auto;
     overflow: hidden; // 내부 .page 가 스스로 스크롤. 캔버스 페이지는 풀스크린 유지.
 }
+
+@media (max-width: 720px) {
+    #header {
+        height: 88px;
+        flex-basis: 88px;
+    }
+}

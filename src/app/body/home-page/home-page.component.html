@@ -15,12 +15,17 @@
             <p [innerHTML]="linkify(profile.bio[0])"></p>
             <p>
               I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I
-              <span class="cook-hover" (mouseenter)="startCookPreview()" (mouseleave)="stopCookPreview()">
+              <span class="cook-hover" (pointerenter)="enterCook($event)" (pointerleave)="leaveCook($event)"
+                (focusout)="blurCook($event)">
                 <a class="cook-link" [href]="cooking.profileUrl" target="_blank" rel="noopener"
-                  aria-label="Visit @ssssyyyyssss_cook on Instagram" (focus)="startCookPreview()" (blur)="stopCookPreview()">cook</a>
-                <span class="cook-preview" aria-hidden="true">
+                  aria-label="Cooking photos" aria-controls="cook-preview" [attr.aria-expanded]="cookPreviewOpen"
+                  (focus)="focusCook()" (click)="tapCook($event)">cook</a>
+                <span id="cook-preview" class="cook-preview" [class.is-open]="cookPreviewOpen"
+                  [class.above]="cookPreviewAbove" [style.left.px]="cookPreviewLeft" [attr.aria-hidden]="!cookPreviewOpen"
+                  [attr.inert]="cookPreviewOpen ? null : ''">
                   <img [src]="cookPhotos[cookPhotoIndex]" alt="" />
-                  <span>@{{ cooking.account }}</span>
+                  <a class="cook-account" [href]="cooking.profileUrl" target="_blank" rel="noopener">@{{ cooking.account }} ↗</a>
+                  <button class="cook-close" type="button" aria-label="Close cooking photos" (click)="stopCookPreview()">×</button>
                 </span>
               </span>, make coffee, and enjoy making things with my hands.
             </p>

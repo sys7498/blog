@@ -40,6 +40,25 @@ a {
 a:hover {
   opacity: 0.6; // 굵기 대신 — 레이아웃 시프트 없음
 }
+
+a, button, input, select, textarea, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button, [role="button"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 3px;
+}
+
+@media (hover: none), (max-width: 720px) {
+  a:hover { opacity: 1; }
+}
 .text-link {
   color: #111;
   border-bottom: 1px solid rgba(17, 17, 17, 0.28);

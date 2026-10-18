@@ -8,6 +8,16 @@
   display: block;
 }
 
+@media (max-width: 720px) {
+  .bg-canvas { opacity: 0.32; }
+  :host .fx-toggle {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 36px;
+    height: 36px;
+  }
+}
+
 /* 토글 버튼 — 우하단 (이스터에그) */
 .fx-toggle {
   position: fixed;

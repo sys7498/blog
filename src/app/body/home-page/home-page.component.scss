@@ -169,6 +169,14 @@
   display: inline-flex;
   z-index: 3;
 }
+.cook-hover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 12px;
+}
 .hero-bio .cook-link {
   color: #191919;
   font-weight: inherit;
@@ -207,20 +215,38 @@
   object-fit: cover;
   grid-area: 1 / 1;
 }
-.cook-preview span {
+.hero-bio .cook-account {
   grid-area: 1 / 1;
   align-self: end;
   justify-self: stretch;
-  padding: 17px 9px 7px;
+  padding: 24px 10px 12px;
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1;
   letter-spacing: 0.04em;
   color: #fff;
+  border: 0;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.62));
 }
-.cook-hover:hover .cook-preview,
-.cook-hover:focus-within .cook-preview {
+.cook-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.cook-preview.above {
+  top: auto;
+  bottom: calc(100% + 12px);
+}
+.cook-preview.is-open {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);
@@ -376,31 +402,123 @@
 }
 
 @media (max-width: 720px) {
+  .page.home {
+    padding: 0;
+    overscroll-behavior-y: contain;
+  }
   .page-inner {
-    padding: 24px 18px 38px;
-    border-radius: 14px;
+    padding: 18px 20px max(48px, env(safe-area-inset-bottom));
+  }
+  .page-inner::before {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .section { padding: 25px 0; }
+  .section:first-child { padding-top: 0; }
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 12px;
   }
   .hero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 22px;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 3px 14px;
+    align-items: center;
+  }
+  .hero-text { display: contents; }
+  .hero-name {
+    grid-column: 2;
+    align-self: end;
+    font-size: clamp(25px, 7vw, 30px);
+    margin: 0;
+    line-height: 1.15;
+  }
+  .hero-role {
+    grid-column: 2;
+    align-self: start;
+    font-size: 13px;
+    margin: 0;
+  }
+  .hero-statement, .hero-bio, .hero-meta, .hero-links {
+    grid-column: 1 / -1;
+  }
+  .hero-statement {
+    font-size: 17px;
+    line-height: 1.45;
+    margin: 14px 0 8px;
+  }
+  .hero-bio {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .hero-bio p { margin-bottom: 9px; }
+  .hero-meta {
+    gap: 6px 14px;
+    font-size: 12px;
+    margin: 2px 0 8px;
+  }
+  .meta-item { gap: 5px; }
+  .meta-item .ico { width: 14px; height: 14px; }
+  .hero-links { gap: 7px; margin-bottom: 0; }
+  .iconlink {
+    padding: 8px 10px;
+    min-height: 20px;
+    font-size: 12px;
+    gap: 5px;
+  }
+  .iconlink .ico { width: 15px; height: 15px; }
+  .iconlink:hover { transform: none; }
+  .cook-preview { max-width: calc(100vw - 32px); }
+  .entry-title { font-size: 14px; line-height: 1.4; }
+  .entry-period { font-size: 11px; }
+  .entry-org { font-size: 12px; line-height: 1.45; }
+  .entry-detail { font-size: 12px; }
+  .entry-news { font-size: 13px; line-height: 1.5; }
+  .entry-venue { font-size: 11px; line-height: 1.4; }
+  .group-label { font-size: 11px; margin: 16px 0 4px; }
+  .media-year { font-size: 11px; gap: 4px; }
+  .media-year .award-badge {
+    font-size: 9px;
+    line-height: 1.5;
+    white-space: normal;
+    padding: 2px 5px;
+  }
+  .linkrow { gap: 12px; }
+  .linkrow a { display: inline-flex; align-items: center; min-height: 32px; font-size: 12px; }
+  .pub-group + .pub-group { margin-top: 10px; }
+  .media-main { min-width: 0; }
+  .thumb img { transform: none; }
+  .reveal {
+    transform: none;
+    transition: opacity 0.2s ease;
   }
   .photo-card {
-    align-self: center;
-    width: 140px;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 64px;
     height: auto;
+    border-radius: 13px;
+    box-shadow: none;
   }
   .entry {
-    grid-template-columns: 76px 1fr;
-    gap: 13px;
+    grid-template-columns: 74px 1fr;
+    gap: 12px;
+    padding: 11px 0;
   }
   .media-row {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 12px;
+    padding: 17px 0;
   }
   .thumb {
-    width: min(100%, 320px);
-    justify-self: center;
-    aspect-ratio: 16 / 10;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cook-preview { transition: none; }
 }
