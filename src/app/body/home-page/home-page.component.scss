@@ -165,19 +165,17 @@
   display: inline-flex;
   z-index: 3;
 }
-.cook-link {
+.hero-bio .cook-link {
   color: #191919;
-  font-weight: 750;
+  font-weight: 700;
+  border-bottom: 0;
   text-decoration: underline;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  text-decoration-color: #f06d3b;
-  transition: color 0.14s ease, text-decoration-color 0.14s ease;
-}
-.cook-link:hover,
-.cook-link:focus-visible {
-  color: #d95324;
   text-decoration-color: currentColor;
+}
+.hero-bio .cook-link:hover,
+.hero-bio .cook-link:focus-visible {
   opacity: 1;
 }
 .cook-preview {
