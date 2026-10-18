@@ -1,7 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { NavService } from '../services/nav.service';
 import { CvService } from '../services/cv.service';
 
@@ -9,13 +8,6 @@ interface SubItem {
   id: string;
   label: string;
 }
-interface PostMeta {
-  slug: string;
-  title: string;
-  date: string;
-  summary?: string;
-}
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -23,8 +15,8 @@ interface PostMeta {
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
-  // Overview 드롭다운: 홈 한 페이지의 섹션들로 스크롤
+export class HeaderComponent {
+  // 홈 한 페이지의 섹션으로 스크롤
   public readonly aboutSub: SubItem[] = [
     { id: 'about', label: 'Profile' },
     { id: 'education', label: 'Education' },
@@ -32,28 +24,16 @@ export class HeaderComponent implements OnInit {
     { id: 'publication', label: 'Publications' },
   ];
 
-  public recentPosts: PostMeta[] = [];
-  public openMenu: '' | 'about' | 'posts' = ''; // 모바일 토글
+  public openMenu = '';
 
   constructor(
     private router: Router,
-    private http: HttpClient,
     public navState: NavService,
     private cv: CvService
   ) {}
 
-  ngOnInit() {
-    this.http.get<PostMeta[]>('assets/posts/index.json').subscribe({
-      next: (p) => (this.recentPosts = p.slice(0, 4)),
-      error: () => (this.recentPosts = []),
-    });
-  }
-
-  get postsActive(): boolean {
-    return this.router.url.startsWith('/post');
-  }
   get aboutActive(): boolean {
-    return !this.postsActive;
+    return this.router.url.split('?')[0] === '/';
   }
   public isSecActive(id: string): boolean {
     return this.aboutActive && this.navState.active() === id;
@@ -83,22 +63,14 @@ export class HeaderComponent implements OnInit {
       setTimeout(() => this.navState.scrollTop(), 0);
     });
   }
-  public goPosts() {
-    this.openMenu = '';
-    this.router.navigate(['/posts']);
-  }
-  public openPost(slug: string) {
-    this.openMenu = '';
-    this.router.navigate(['/post', slug]);
-  }
   public async openCv() {
     this.openMenu = '';
     await this.cv.download();
   }
 
-  public toggleMenu(which: 'about' | 'posts', event: MouseEvent) {
+  public toggleMenu(event: MouseEvent) {
     event.stopPropagation();
-    this.openMenu = this.openMenu === which ? '' : which;
+    this.openMenu = this.openMenu ? '' : 'menu';
   }
 
   @HostListener('document:click')

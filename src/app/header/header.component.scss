@@ -27,13 +27,9 @@
 .nav-wide {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
-/* nav item + hover 드롭다운 */
-.nav-item {
-    position: relative;
-}
 .nav-link {
     font-family: inherit;
     font-size: 17px;
@@ -46,11 +42,7 @@
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
-    gap: 7px;
     transition: background 0.15s, color 0.15s;
-}
-.nav-link .ni {
-    font-size: 13px;
 }
 .nav-link:hover {
     background: #f5f5f3;
@@ -242,7 +234,7 @@
     padding: 10px 12px 4px;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 820px) {
     .header-container {
         padding-left: 22px;
         padding-right: 22px;

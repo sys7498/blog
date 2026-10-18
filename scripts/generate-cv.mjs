@@ -139,11 +139,73 @@ function addEntry(doc, left, title, lines = []) {
 function addAuthors(doc, authors) {
   const parts = authors.split(/(Yoonseok Shin|Y\. Shin)/g).filter(Boolean);
   doc.fontSize(9.3).fillColor('#444');
-  for (const part of parts) {
+  parts.forEach((part, index) => {
     const isMe = part === 'Yoonseok Shin' || part === 'Y. Shin';
-    doc.font(isMe ? 'Helvetica-Bold' : 'Helvetica').text(part, { continued: true });
+    doc.font(isMe ? 'Helvetica-Bold' : 'Helvetica').text(part, {
+      continued: index < parts.length - 1,
+      width: 395,
+      lineGap: 1,
+    });
+  });
+  doc.text('', { lineGap: 1 });
+}
+
+function addPageHeader(doc, profile) {
+  doc
+    .font('Helvetica')
+    .fontSize(8.5)
+    .fillColor('#666')
+    .text(`${profile.name} · Curriculum Vitae`, 54, 54, {
+      width: 486,
+      align: 'right',
+    });
+  doc.moveTo(54, 70).lineTo(540, 70).strokeColor('#dddddd').stroke();
+  doc.x = 54;
+  doc.y = 82;
+}
+
+function addPublication(doc, pub) {
+  const leftX = 54;
+  const contentX = 145;
+  const contentWidth = 395;
+  const top = doc.y;
+
+  doc
+    .font('Helvetica')
+    .fontSize(9)
+    .fillColor('#777')
+    .text(String(pub.year), leftX, top, { width: 82 });
+  doc
+    .font('Helvetica-Bold')
+    .fontSize(10)
+    .fillColor('#111')
+    .text(pub.title, contentX, top, { width: contentWidth, lineGap: 1 });
+  doc
+    .font('Helvetica')
+    .fontSize(9)
+    .fillColor('#777')
+    .text(`${pub.category} | ${pub.venue}`, contentX, doc.y + 2, {
+      width: contentWidth,
+      lineGap: 1,
+    });
+  if (pub.award) {
+    doc
+      .font('Helvetica-Bold')
+      .fontSize(9)
+      .fillColor('#7a4d00')
+      .text(`Award: ${pub.award}`, contentX, doc.y + 2, { width: contentWidth });
   }
-  doc.text('');
+  doc.x = contentX;
+  doc.y += 2;
+  addAuthors(doc, pub.authors);
+  if (pub.doi) {
+    doc
+      .font('Helvetica')
+      .fontSize(8.7)
+      .fillColor('#666')
+      .text(`DOI: ${pub.doi}`, contentX, doc.y + 1, { width: contentWidth });
+  }
+  doc.moveDown(0.7);
 }
 
 const profile = extractProfile();
@@ -171,17 +233,11 @@ for (const item of profile.education) addEntry(doc, item.period, item.title, [it
 addSection(doc, 'Experience');
 for (const item of profile.experience) addEntry(doc, item.period, item.title, [item.org, item.location, item.detail]);
 
+doc.addPage();
+addPageHeader(doc, profile);
+
 addSection(doc, 'Publications');
-for (const pub of publications) {
-  const top = doc.y;
-  doc.font('Helvetica').fontSize(9).fillColor('#777').text(String(pub.year), 54, top, { width: 82 });
-  doc.font('Helvetica-Bold').fontSize(10).fillColor('#111').text(pub.title, 145, top, { width: 395 });
-  doc.font('Helvetica').fontSize(9).fillColor('#777').text(`${pub.category} | ${pub.venue}`, 145, doc.y + 2, { width: 395 });
-  if (pub.award) doc.font('Helvetica-Bold').fontSize(9).fillColor('#7a4d00').text(`Award: ${pub.award}`, 145, doc.y + 2, { width: 395 });
-  addAuthors(doc, pub.authors);
-  if (pub.doi) doc.font('Helvetica').fontSize(8.7).fillColor('#666').text(`DOI: ${pub.doi}`, 145, doc.y + 1, { width: 395 });
-  doc.moveDown(0.55);
-}
+for (const pub of publications) addPublication(doc, pub);
 
 addSection(doc, 'Skills');
 for (const group of profile.skills) addEntry(doc, group.group, group.items.join(', '));

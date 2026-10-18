@@ -1,14 +1,25 @@
 $header-height: 60px;
 
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
 #header {
     position: relative;
     z-index: 10; // 드롭다운이 본문(캔버스/콘텐츠) 위에 보이도록
     width: 100%;
     height: $header-height;
+    flex: 0 0 $header-height;
 }
 
 #body {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
-    height: calc(100% - #{$header-height});
+    height: auto;
     overflow: hidden; // 내부 .page 가 스스로 스크롤. 캔버스 페이지는 풀스크린 유지.
 }
