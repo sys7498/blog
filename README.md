@@ -4,6 +4,10 @@ Angular 20. Use Node.js 22.12+ and `npm ci`, then `npm start` or `npm run build`
 
 ## Publications
 
+Cooking hover preview imports are tracked in `src/data/cooking.json`.
+See [the update procedure](docs/cooking-imports.md) before importing more photos
+to avoid downloading the same Instagram post twice.
+
 `src/assets/publications.bib` is shared by the homepage, publications page and generated CV.
 Edit `category = {paper}`, `{demo-poster}`, or `{unclassified}` to control the grouping.
 The SIGGRAPH Asia 2025 XR contribution is a demo, so it belongs to `demo-poster`.

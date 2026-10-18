@@ -16,11 +16,11 @@
             <p>
               I build interactive 3D and WebXR experiences that double as research prototypes. Outside the lab, I
               <span class="cook-hover" (mouseenter)="startCookPreview()" (mouseleave)="stopCookPreview()">
-                <a class="cook-link" href="https://www.instagram.com/ssssyyyyssss_cook/" target="_blank" rel="noopener"
+                <a class="cook-link" [href]="cooking.profileUrl" target="_blank" rel="noopener"
                   aria-label="Visit @ssssyyyyssss_cook on Instagram" (focus)="startCookPreview()" (blur)="stopCookPreview()">cook</a>
                 <span class="cook-preview" aria-hidden="true">
                   <img [src]="cookPhotos[cookPhotoIndex]" alt="" />
-                  <span>@ssssyyyyssss_cook</span>
+                  <span>@{{ cooking.account }}</span>
                 </span>
               </span>, make coffee, and enjoy making things with my hands.
             </p>

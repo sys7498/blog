@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { PROFILE } from '../../../data/profile';
+import cooking from '../../../data/cooking.json';
 import { PUBLICATIONS, Publication } from '../../../data/publications';
 import { parseBibtex } from '../../../data/bibtex';
 import { NavService } from '../../services/nav.service';
@@ -24,10 +25,8 @@ import { CvService } from '../../services/cv.service';
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly profile = PROFILE;
-  public readonly cookPhotos = Array.from(
-    { length: 12 },
-    (_, index) => `assets/cook/cook-${String(index + 1).padStart(2, '0')}.jpg`
-  );
+  public readonly cooking = cooking;
+  public readonly cookPhotos = cooking.posts.map((post) => post.image);
   public publications: Publication[] = [...PUBLICATIONS];
   public cookPhotoIndex = 0;
 
