@@ -10,11 +10,12 @@ CDN URLs expire.
 
 ## Current coverage
 
-- Imported on 2026-10-19: 12 representative photos, one per listed post.
-- Newest imported post: `DeZblddOZH-` (소갈비수육).
-- Oldest imported post: `DQw3hw3E-1j` (카레파스타).
-- This is not a complete archive of the 71 posts seen on the account.
-- `DeZb4lmuOhn` (물냉면), seen above the newest imported post, has not been imported.
+- Imported on 2026-10-19: all 71 visible posts, one representative image per post
+  (70 photo posts and one espresso reel cover). Carousel secondary slides and
+  full reel video are not imported.
+- Newest imported post: `DeZb4lmuOhn` (물냉면).
+- Oldest imported post: `CuPliT0hFMQ` (Detroit Bulgogi Pizza).
+- The initial 12 local files were retained; 59 missing entries were added.
 - Files remaining in Downloads are not considered imported. Only manifest entries
   with an existing local image count as imported.
 
@@ -32,6 +33,13 @@ CDN URLs expire.
    date only after successful imports. Never keep expiring CDN query URLs.
 5. Verify unique shortcodes and image paths, check every image exists, build,
    and verify the preview before pushing/deploying.
+
+`scripts/import-cooking.mjs` imports browser-exported `pageAssets` bundles using
+rows of `shortcode|source filename prefix|caption|optional reel`. It skips existing
+post IDs with a local file, saves new images by shortcode, resizes to 420px, and
+records the import date. Use the same existing-ID check **before exporting assets**
+from the browser too, so repeat updates do not download imported photos again.
+Retain source filenames in new records; do not store expiring CDN URLs.
 
 Do not use the newest imported post as a hard cutoff: earlier posts can still be
 missing. This record supports manual updates on request; it is not an automatic

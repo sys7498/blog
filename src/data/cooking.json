@@ -3,19 +3,563 @@
   "account": "ssssyyyyssss_cook",
   "profileUrl": "https://www.instagram.com/ssssyyyyssss_cook/",
   "lastImportedOn": "2026-10-19",
-  "coverage": "Selected representative photos only; not a complete account archive. Deduplicate by shortcode, not by date or filename.",
+  "coverage": "All 71 posts visible on 2026-10-19: 70 photo posts and one espresso reel cover, one representative image per post. Deduplicate by shortcode, not by date or filename.",
   "posts": [
-    { "shortcode": "DeZblddOZH-", "caption": "소갈비수육", "permalink": "https://www.instagram.com/p/DeZblddOZH-/", "image": "assets/cook/cook-01.jpg" },
-    { "shortcode": "DeW0mejOIQ4", "caption": "소갈비리조또", "permalink": "https://www.instagram.com/p/DeW0mejOIQ4/", "image": "assets/cook/cook-02.jpg" },
-    { "shortcode": "DeROwR4ufq5", "caption": "김치찌개", "permalink": "https://www.instagram.com/p/DeROwR4ufq5/", "image": "assets/cook/cook-03.jpg" },
-    { "shortcode": "DdoY_ApOhEl", "caption": "육전", "permalink": "https://www.instagram.com/p/DdoY_ApOhEl/", "image": "assets/cook/cook-04.jpg" },
-    { "shortcode": "Ddgkbkeu-lf", "caption": "불고기파스타", "permalink": "https://www.instagram.com/p/Ddgkbkeu-lf/", "image": "assets/cook/cook-05.jpg" },
-    { "shortcode": "DdRGSjsujg7", "caption": "떠먹는피자 · 불고기피자", "permalink": "https://www.instagram.com/p/DdRGSjsujg7/", "image": "assets/cook/cook-06.jpg" },
-    { "shortcode": "DWv-0e7AQya", "caption": "스테이크치아바타", "permalink": "https://www.instagram.com/p/DWv-0e7AQya/", "image": "assets/cook/cook-07.jpg" },
-    { "shortcode": "DS9vAjTEofy", "caption": "떡국 · 새해한상", "permalink": "https://www.instagram.com/p/DS9vAjTEofy/", "image": "assets/cook/cook-08.jpg" },
-    { "shortcode": "DSreuwDgewX", "caption": "문어파스타", "permalink": "https://www.instagram.com/p/DSreuwDgewX/", "image": "assets/cook/cook-09.jpg" },
-    { "shortcode": "DSremccAUyL", "caption": "안심스테이크", "permalink": "https://www.instagram.com/p/DSremccAUyL/", "image": "assets/cook/cook-10.jpg" },
-    { "shortcode": "DQw3nzpk-I-", "caption": "갈치솥밥", "permalink": "https://www.instagram.com/p/DQw3nzpk-I-/", "image": "assets/cook/cook-11.jpg" },
-    { "shortcode": "DQw3hw3E-1j", "caption": "카레파스타", "permalink": "https://www.instagram.com/p/DQw3hw3E-1j/", "image": "assets/cook/cook-12.jpg" }
+    {
+      "shortcode": "DeZb4lmuOhn",
+      "caption": "물냉면",
+      "permalink": "https://www.instagram.com/p/DeZb4lmuOhn/",
+      "image": "assets/cook/DeZb4lmuOhn.jpg",
+      "sourceMediaFilename": "840205785_17992707927023502_8691167565747579852_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DeZblddOZH-",
+      "caption": "소갈비수육",
+      "permalink": "https://www.instagram.com/p/DeZblddOZH-/",
+      "image": "assets/cook/cook-01.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DeW0mejOIQ4",
+      "caption": "소갈비리조또",
+      "permalink": "https://www.instagram.com/p/DeW0mejOIQ4/",
+      "image": "assets/cook/cook-02.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DeROwR4ufq5",
+      "caption": "김치찌개",
+      "permalink": "https://www.instagram.com/p/DeROwR4ufq5/",
+      "image": "assets/cook/cook-03.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DdoY_ApOhEl",
+      "caption": "육전",
+      "permalink": "https://www.instagram.com/p/DdoY_ApOhEl/",
+      "image": "assets/cook/cook-04.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "Ddgkbkeu-lf",
+      "caption": "불고기파스타",
+      "permalink": "https://www.instagram.com/p/Ddgkbkeu-lf/",
+      "image": "assets/cook/cook-05.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DdRGSjsujg7",
+      "caption": "떠먹는피자 · 불고기피자",
+      "permalink": "https://www.instagram.com/p/DdRGSjsujg7/",
+      "image": "assets/cook/cook-06.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DWv-0e7AQya",
+      "caption": "스테이크치아바타",
+      "permalink": "https://www.instagram.com/p/DWv-0e7AQya/",
+      "image": "assets/cook/cook-07.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DS9vAjTEofy",
+      "caption": "떡국 · 새해한상",
+      "permalink": "https://www.instagram.com/p/DS9vAjTEofy/",
+      "image": "assets/cook/cook-08.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DSreuwDgewX",
+      "caption": "문어파스타",
+      "permalink": "https://www.instagram.com/p/DSreuwDgewX/",
+      "image": "assets/cook/cook-09.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DSremccAUyL",
+      "caption": "안심스테이크",
+      "permalink": "https://www.instagram.com/p/DSremccAUyL/",
+      "image": "assets/cook/cook-10.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DQw3nzpk-I-",
+      "caption": "갈치솥밥",
+      "permalink": "https://www.instagram.com/p/DQw3nzpk-I-/",
+      "image": "assets/cook/cook-11.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DQw3hw3E-1j",
+      "caption": "카레파스타",
+      "permalink": "https://www.instagram.com/p/DQw3hw3E-1j/",
+      "image": "assets/cook/cook-12.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DO37pAAE71K",
+      "caption": "김치수제비",
+      "permalink": "https://www.instagram.com/p/DO37pAAE71K/",
+      "image": "assets/cook/DO37pAAE71K.jpg",
+      "sourceMediaFilename": "551454299_17945027895023502_6265096446462626325_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DMiGTAMzKXm",
+      "caption": "바지락손칼국수",
+      "permalink": "https://www.instagram.com/p/DMiGTAMzKXm/",
+      "image": "assets/cook/DMiGTAMzKXm.jpg",
+      "sourceMediaFilename": "524923421_17938676508023502_1299585543365237807_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DMh1Jb2T-na",
+      "caption": "새우파전",
+      "permalink": "https://www.instagram.com/p/DMh1Jb2T-na/",
+      "image": "assets/cook/DMh1Jb2T-na.jpg",
+      "sourceMediaFilename": "523934497_17938664985023502_5037273257184260981_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DMh08XdTHDQ",
+      "caption": "새우샤프란리조또",
+      "permalink": "https://www.instagram.com/p/DMh08XdTHDQ/",
+      "image": "assets/cook/DMh08XdTHDQ.jpg",
+      "sourceMediaFilename": "524664352_17938664880023502_5032227952130277977_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DK0l9KHTIAe",
+      "caption": "삼겹쑥갓전골",
+      "permalink": "https://www.instagram.com/p/DK0l9KHTIAe/",
+      "image": "assets/cook/DK0l9KHTIAe.jpg",
+      "sourceMediaFilename": "505739563_17934174480023502_2958127221289728733_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DK0l3_JT8mJ",
+      "caption": "스테이크 · 퀘사디아",
+      "permalink": "https://www.instagram.com/p/DK0l3_JT8mJ/",
+      "image": "assets/cook/DK0l3_JT8mJ.jpg",
+      "sourceMediaFilename": "505494188_17934174423023502_8783992395535467648_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DKI3aq2z7b-",
+      "caption": "비빔밥",
+      "permalink": "https://www.instagram.com/p/DKI3aq2z7b-/",
+      "image": "assets/cook/DKI3aq2z7b-.jpg",
+      "sourceMediaFilename": "500996548_17932240953023502_4594978955175385033_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DKI3WT8T2-W",
+      "caption": "해물토마토파스타",
+      "permalink": "https://www.instagram.com/p/DKI3WT8T2-W/",
+      "image": "assets/cook/DKI3WT8T2-W.jpg",
+      "sourceMediaFilename": "501028804_17932240929023502_5822716934748200687_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DKI3TseTVVo",
+      "caption": "소고기솥밥",
+      "permalink": "https://www.instagram.com/p/DKI3TseTVVo/",
+      "image": "assets/cook/DKI3TseTVVo.jpg",
+      "sourceMediaFilename": "501367148_17932240887023502_3216318625556601459_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DKI3QpVTxRa",
+      "caption": "순살갈비찜",
+      "permalink": "https://www.instagram.com/p/DKI3QpVTxRa/",
+      "image": "assets/cook/DKI3QpVTxRa.jpg",
+      "sourceMediaFilename": "501888326_17932240860023502_5496713260195038339_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DKI3NDbzl4I",
+      "caption": "쑥갓소고기된장찌개",
+      "permalink": "https://www.instagram.com/p/DKI3NDbzl4I/",
+      "image": "assets/cook/DKI3NDbzl4I.jpg",
+      "sourceMediaFilename": "500746098_17932240830023502_927966950789372998_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DJy-CG_zy9x",
+      "caption": "퀘사디아",
+      "permalink": "https://www.instagram.com/p/DJy-CG_zy9x/",
+      "image": "assets/cook/DJy-CG_zy9x.jpg",
+      "sourceMediaFilename": "498574704_17931285450023502_6299447895695070660_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DJy-ALPzHcW",
+      "caption": "등촌볶음밥",
+      "permalink": "https://www.instagram.com/p/DJy-ALPzHcW/",
+      "image": "assets/cook/DJy-ALPzHcW.jpg",
+      "sourceMediaFilename": "499404426_17931285348023502_7837336985107598730_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DJy97vDze3X",
+      "caption": "부대찌개",
+      "permalink": "https://www.instagram.com/p/DJy97vDze3X/",
+      "image": "assets/cook/DJy97vDze3X.jpg",
+      "sourceMediaFilename": "498918436_17931285258023502_7297809038649501062_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DJy922bzo3s",
+      "caption": "오븐치즈라구파스타",
+      "permalink": "https://www.instagram.com/p/DJy922bzo3s/",
+      "image": "assets/cook/DJy922bzo3s.jpg",
+      "sourceMediaFilename": "499664139_17931285111023502_2429977462327275547_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DH1PLBjTMEB",
+      "caption": "불고기치즈파스타",
+      "permalink": "https://www.instagram.com/p/DH1PLBjTMEB/",
+      "image": "assets/cook/DH1PLBjTMEB.jpg",
+      "sourceMediaFilename": "487795582_17926206093023502_4511434342691866509_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DH1PB8rTaJu",
+      "caption": "소고기볶음밥",
+      "permalink": "https://www.instagram.com/p/DH1PB8rTaJu/",
+      "image": "assets/cook/DH1PB8rTaJu.jpg",
+      "sourceMediaFilename": "487812120_17926205949023502_4820526649423666474_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DHbJW1xT5MG",
+      "caption": "등심 스테이크",
+      "permalink": "https://www.instagram.com/p/DHbJW1xT5MG/",
+      "image": "assets/cook/DHbJW1xT5MG.jpg",
+      "sourceMediaFilename": "486026197_17925161943023502_4604308654763725615_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DHRDPStTW8-",
+      "caption": "베이컨토마토파스타",
+      "permalink": "https://www.instagram.com/p/DHRDPStTW8-/",
+      "image": "assets/cook/DHRDPStTW8-.jpg",
+      "sourceMediaFilename": "485026925_17924763057023502_4038045411177038871_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DGx6Y-rT8ar",
+      "caption": "소고기치즈카레라이스",
+      "permalink": "https://www.instagram.com/p/DGx6Y-rT8ar/",
+      "image": "assets/cook/DGx6Y-rT8ar.jpg",
+      "sourceMediaFilename": "482757310_17923381167023502_827500706611032425_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DGvlO1ATaC2",
+      "caption": "어묵탕",
+      "permalink": "https://www.instagram.com/p/DGvlO1ATaC2/",
+      "image": "assets/cook/DGvlO1ATaC2.jpg",
+      "sourceMediaFilename": "482784525_17923281831023502_5494559282787986041_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DGf7SRlPozL",
+      "caption": "김치볶음밥",
+      "permalink": "https://www.instagram.com/p/DGf7SRlPozL/",
+      "image": "assets/cook/DGf7SRlPozL.jpg",
+      "sourceMediaFilename": "481330149_17922560292023502_6032611628701911472_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DGf7D-avU39",
+      "caption": "아라비아따 · 파르팔레 · 안심",
+      "permalink": "https://www.instagram.com/p/DGf7D-avU39/",
+      "image": "assets/cook/DGf7D-avU39.jpg",
+      "sourceMediaFilename": "480939703_17922560103023502_8990929897687567813_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DGSzvCIvowf",
+      "caption": "알리오올리오",
+      "permalink": "https://www.instagram.com/p/DGSzvCIvowf/",
+      "image": "assets/cook/DGSzvCIvowf.jpg",
+      "sourceMediaFilename": "480859096_17921972148023502_3327795215125626425_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DFkJb7_P1Bk",
+      "caption": "아라비아따 · 리가토니",
+      "permalink": "https://www.instagram.com/p/DFkJb7_P1Bk/",
+      "image": "assets/cook/DFkJb7_P1Bk.jpg",
+      "sourceMediaFilename": "475460108_17919893919023502_2893496651917233665_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DFVVd_7TYCo",
+      "caption": "스테이크",
+      "permalink": "https://www.instagram.com/p/DFVVd_7TYCo/",
+      "image": "assets/cook/DFVVd_7TYCo.jpg",
+      "sourceMediaFilename": "475492727_17919287736023502_8797299936421638734_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DE5Ke7Az1u9",
+      "caption": "고등어구이",
+      "permalink": "https://www.instagram.com/p/DE5Ke7Az1u9/",
+      "image": "assets/cook/DE5Ke7Az1u9.jpg",
+      "sourceMediaFilename": "473546445_17918026155023502_6125476739809942905_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DE5KZmbzu2A",
+      "caption": "트러플짜계치",
+      "permalink": "https://www.instagram.com/p/DE5KZmbzu2A/",
+      "image": "assets/cook/DE5KZmbzu2A.jpg",
+      "sourceMediaFilename": "474005500_17918026026023502_6124239145562314588_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DESnDy0SvtO",
+      "caption": "참치김치우동 · 소세지야채볶음",
+      "permalink": "https://www.instagram.com/p/DESnDy0SvtO/",
+      "image": "assets/cook/DESnDy0SvtO.jpg",
+      "sourceMediaFilename": "661382186_18013807253838791_1017760505980404690_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DESm92vyxQY",
+      "caption": "목살",
+      "permalink": "https://www.instagram.com/p/DESm92vyxQY/",
+      "image": "assets/cook/DESm92vyxQY.jpg",
+      "sourceMediaFilename": "655444996_18091336703515374_4383556795943585373_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DESmyXuyOED",
+      "caption": "아메리카노",
+      "permalink": "https://www.instagram.com/p/DESmyXuyOED/",
+      "image": "assets/cook/DESmyXuyOED.jpg",
+      "sourceMediaFilename": "655981768_18069156110269121_6524370146514237784_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDm1ScXTuBy",
+      "caption": "수육 · 죽",
+      "permalink": "https://www.instagram.com/p/DDm1ScXTuBy/",
+      "image": "assets/cook/DDm1ScXTuBy.jpg",
+      "sourceMediaFilename": "669691416_18137850190509050_8139436813024501919_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDkSFt_zI8J",
+      "caption": "불고기파스타 · 팽이버섯전",
+      "permalink": "https://www.instagram.com/p/DDkSFt_zI8J/",
+      "image": "assets/cook/DDkSFt_zI8J.jpg",
+      "sourceMediaFilename": "660180568_17983571405992761_7043912232977757623_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDkR_5wTWim",
+      "caption": "족발덮밥",
+      "permalink": "https://www.instagram.com/p/DDkR_5wTWim/",
+      "image": "assets/cook/DDkR_5wTWim.jpg",
+      "sourceMediaFilename": "659058078_17908098561199756_7771239461684912370_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDCrw61TK33",
+      "caption": "볶음밥 · 짬뽕",
+      "permalink": "https://www.instagram.com/p/DDCrw61TK33/",
+      "image": "assets/cook/DDCrw61TK33.jpg",
+      "sourceMediaFilename": "660013993_17985744113972555_738479382832324028_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDCrrEVzgcz",
+      "caption": "계란말이",
+      "permalink": "https://www.instagram.com/p/DDCrrEVzgcz/",
+      "image": "assets/cook/DDCrrEVzgcz.jpg",
+      "sourceMediaFilename": "661330342_18001870784873893_33035599820289047_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DDCroQmTWJ_",
+      "caption": "알리오올리오",
+      "permalink": "https://www.instagram.com/p/DDCroQmTWJ_/",
+      "image": "assets/cook/DDCroQmTWJ_.jpg",
+      "sourceMediaFilename": "659295116_17964630030058649_1257870910815547531_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DB6kvJ_TDz9",
+      "caption": "토마토 라구 파스타",
+      "permalink": "https://www.instagram.com/p/DB6kvJ_TDz9/",
+      "image": "assets/cook/DB6kvJ_TDz9.jpg",
+      "sourceMediaFilename": "659094813_18311135812275295_6314273300776133185_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DB33U05TW10",
+      "caption": "까르보나라",
+      "permalink": "https://www.instagram.com/p/DB33U05TW10/",
+      "image": "assets/cook/DB33U05TW10.jpg",
+      "sourceMediaFilename": "660140866_18089546039241750_858715829259256026_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DB33HeWzkAa",
+      "caption": "토마토 리조또",
+      "permalink": "https://www.instagram.com/p/DB33HeWzkAa/",
+      "image": "assets/cook/DB33HeWzkAa.jpg",
+      "sourceMediaFilename": "658407941_18081222779618296_6450914392420935379_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DA33HkUz1FI",
+      "caption": "트러플까르보나라",
+      "permalink": "https://www.instagram.com/p/DA33HkUz1FI/",
+      "image": "assets/cook/DA33HkUz1FI.jpg",
+      "sourceMediaFilename": "656278159_18067082111313574_2242191419292457640_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DAySG2hOKTG",
+      "caption": "에스프레소 샷 내리기",
+      "permalink": "https://www.instagram.com/reel/DAySG2hOKTG/",
+      "image": "assets/cook/DAySG2hOKTG.jpg",
+      "sourceMediaFilename": "501667721_729452859518052_3508163128843467512_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DAyR6xAzlp1",
+      "caption": "동파육 덮밥",
+      "permalink": "https://www.instagram.com/p/DAyR6xAzlp1/",
+      "image": "assets/cook/DAyR6xAzlp1.jpg",
+      "sourceMediaFilename": "669526949_18098506372818970_3216721152369382586_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DAyR0U-T10m",
+      "caption": "갈치구이 · 마늘계란 볶음밥",
+      "permalink": "https://www.instagram.com/p/DAyR0U-T10m/",
+      "image": "assets/cook/DAyR0U-T10m.jpg",
+      "sourceMediaFilename": "671117694_18031527977801909_7480662229334251469_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DAf4MoYvo8F",
+      "caption": "함박스테이크 · 삼겹살구이",
+      "permalink": "https://www.instagram.com/p/DAf4MoYvo8F/",
+      "image": "assets/cook/DAf4MoYvo8F.jpg",
+      "sourceMediaFilename": "658955442_18041442683555993_6939069849727678761_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "DAf4FjEv2RW",
+      "caption": "김치우동",
+      "permalink": "https://www.instagram.com/p/DAf4FjEv2RW/",
+      "image": "assets/cook/DAf4FjEv2RW.jpg",
+      "sourceMediaFilename": "661376576_18121488052626942_7558885318061863229_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CyCpwtRrnwq",
+      "caption": "매운돼지갈비솥밥",
+      "permalink": "https://www.instagram.com/p/CyCpwtRrnwq/",
+      "image": "assets/cook/CyCpwtRrnwq.jpg",
+      "sourceMediaFilename": "622917709_18088910717513317_7514164133911726561_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CxBREi2JtN1",
+      "caption": "비스크 로제 파스타 · 찹쌀 새우탕수",
+      "permalink": "https://www.instagram.com/p/CxBREi2JtN1/",
+      "image": "assets/cook/CxBREi2JtN1.jpg",
+      "sourceMediaFilename": "624629088_18079205117520910_6164800022978866527_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CxAQ59MrlJk",
+      "caption": "베이글 · 김치찌개",
+      "permalink": "https://www.instagram.com/p/CxAQ59MrlJk/",
+      "image": "assets/cook/CxAQ59MrlJk.jpg",
+      "sourceMediaFilename": "620505969_18110994649652331_2612550849044973867_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "Cv49Q6iJV2A",
+      "caption": "등심 스테이크",
+      "permalink": "https://www.instagram.com/p/Cv49Q6iJV2A/",
+      "image": "assets/cook/Cv49Q6iJV2A.jpg",
+      "sourceMediaFilename": "653079167_18098090362957774_3944994375775013891_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "Cv49IMxJjX1",
+      "caption": "로제 파 제육볶음",
+      "permalink": "https://www.instagram.com/p/Cv49IMxJjX1/",
+      "image": "assets/cook/Cv49IMxJjX1.jpg",
+      "sourceMediaFilename": "622377438_18075718676369413_5801397356441950864_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "Cvpo2VypM7H",
+      "caption": "돈코츠라멘 · 차슈",
+      "permalink": "https://www.instagram.com/p/Cvpo2VypM7H/",
+      "image": "assets/cook/Cvpo2VypM7H.jpg",
+      "sourceMediaFilename": "626832782_18330980395168791_6124599528357202658_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CvK8uCeSM6H",
+      "caption": "간장찜닭",
+      "permalink": "https://www.instagram.com/p/CvK8uCeSM6H/",
+      "image": "assets/cook/CvK8uCeSM6H.jpg",
+      "sourceMediaFilename": "625365760_18091488575053507_4639559688624617588_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CvK8jwryoSi",
+      "caption": "로제찜닭파스타",
+      "permalink": "https://www.instagram.com/p/CvK8jwryoSi/",
+      "image": "assets/cook/CvK8jwryoSi.jpg",
+      "sourceMediaFilename": "621832785_17963463233880021_7188688996186226842_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CumQEIlhCix",
+      "caption": "스테이크 · 라볶이",
+      "permalink": "https://www.instagram.com/p/CumQEIlhCix/",
+      "image": "assets/cook/CumQEIlhCix.jpg",
+      "sourceMediaFilename": "653995990_18173592325385781_5430818483671651765_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CulJqBLhV_h",
+      "caption": "참치김치찌개 · 계란말이 · 소고기 · 솥밥",
+      "permalink": "https://www.instagram.com/p/CulJqBLhV_h/",
+      "image": "assets/cook/CulJqBLhV_h.jpg",
+      "sourceMediaFilename": "650720300_17988346805786109_1292281416531991982_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CuPnOteB_iX",
+      "caption": "볶음밥 · 짜장 · 군만두",
+      "permalink": "https://www.instagram.com/p/CuPnOteB_iX/",
+      "image": "assets/cook/CuPnOteB_iX.jpg",
+      "sourceMediaFilename": "624539880_18124043134556495_653422961045336897_n.jpg",
+      "importedOn": "2026-10-19"
+    },
+    {
+      "shortcode": "CuPliT0hFMQ",
+      "caption": "Detroit Bulgogi Pizza",
+      "permalink": "https://www.instagram.com/p/CuPliT0hFMQ/",
+      "image": "assets/cook/CuPliT0hFMQ.jpg",
+      "sourceMediaFilename": "657685030_18082614338055757_1098134166079679993_n.jpg",
+      "importedOn": "2026-10-19"
+    }
   ]
 }
